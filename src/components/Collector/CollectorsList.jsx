@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCollectorFailure, getCollectorStart, getCollectorSuccess } from "../../store/redux-store/CollectorSlice";
+import { baseURL } from "../../utils/url";
 import CollectorsItems from "./CollectorsItems";
 
 const DUMMY_DATA = [
@@ -49,7 +50,7 @@ const CollectorsList = () => {
     const getCollectors = async() => {
       dispatch(getCollectorStart());
       try {
-        const res = await axios.get("http://localhost:3000/api/collectors");
+        const res = await axios.get(`${baseURL}/api/collectors`);
         dispatch(getCollectorSuccess(res.data));
       }catch(err) {
         dispatch(getCollectorFailure())

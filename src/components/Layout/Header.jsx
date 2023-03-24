@@ -3,6 +3,7 @@ import { Avatar } from "../UI/Avatar";
 import { CardanoWallet, MeshBadge } from "@meshsdk/react";
 
 export const Header = () => {
+   console.log(window.location.hostname.split(":")[0])
   return (
     <header className="col-span-full h-full bg-[#14171F] py-[10px] px-[32px] flex justify-between items-center">
       <h1 className="text-white text-2xl tracking-wide">Admin Panel</h1>

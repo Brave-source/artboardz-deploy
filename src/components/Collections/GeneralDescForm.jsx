@@ -15,6 +15,7 @@ import { UIActions } from "../../store/redux-store/UI-slice";
 import CircularProgress from '@mui/material/CircularProgress';
 import { addCollectionFailure, addCollectionStart, addCollectionSuccess } from "../../store/redux-store/CollectionSlice";
 import Image from "next/image";
+import { baseURL } from "../../utils/url";
 
 const GeneralDescForm = () => {
   const [inputs, setInputs] = useState({});
@@ -120,10 +121,10 @@ const GeneralDescForm = () => {
 
   const formSubmitHandler = async(evt) => {
     evt.preventDefault();
-    setErrors(validation(inputs))
+    // setErrors(validation(inputs))
     dispatch(addCollectionStart())
     try {
-      const res = await axios.post('http://localhost:3000/api/collections', inputs)
+      const res = await axios.post(`${baseURL}/api/collections`, inputs)
       dispatch(UIActions.hideAddCollectionForm())
       dispatch(addCollectionSuccess(res.data));
       toast.success("Successfully added")
@@ -133,7 +134,6 @@ const GeneralDescForm = () => {
     }
   };
 
-  console.log(inputs)
 
   return (
     <form className="grid grid-cols-3 gap-4" onSubmit={formSubmitHandler}>

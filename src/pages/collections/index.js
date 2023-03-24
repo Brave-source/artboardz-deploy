@@ -6,11 +6,11 @@ import { useSelector } from "react-redux";
 const Collections = () => {
   const router = useRouter()
   const admin = useSelector((state) => state.admin.admin)
-  // useEffect(() => {
-  //   if(!admin.success) {
-  //     router.push("/")
-  //   }
-  // },[])
+  useEffect(() => {
+    if(!admin.success) {
+      router.push("/")
+    }
+  },[])
 
   return <CollectionBoard />;
 }
