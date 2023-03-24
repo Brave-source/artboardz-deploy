@@ -46,8 +46,7 @@ async function getStakeAddress(){
         const sigData = await wallet.signData(stakeAddrHex, messageHex);
         const res = await axios.post(`${baseURL}/api/collectors`, sigData);
         dispatch(getAdminSuccess(res.data))
-        
-
+        router.push("/collections")
     }catch(err){
         console.log(err)
         dispatch(getAdminFailure())

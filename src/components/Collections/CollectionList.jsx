@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import CollectionItem from "./CollectionsIItem";
 import { useDispatch, useSelector } from "react-redux";
 import { getCollectionFailure, getCollectionStart, getCollectionSuccess } from "../../store/redux-store/CollectionSlice";
+import { baseURL } from "../../utils/url";
 
 const DUMMY_DATA = [
   {
@@ -35,7 +36,7 @@ useEffect(() => {
   const getCollections = async() => {
     dispatch(getCollectionStart())
     try {
-      const res = await axios.get('http://localhost:3000/api/collections')
+      const res = await axios.get(`${baseURL}/api/collections`)
       dispatch(getCollectionSuccess((res.data)));
     }catch(err){
       dispatch(getCollectionFailure())
