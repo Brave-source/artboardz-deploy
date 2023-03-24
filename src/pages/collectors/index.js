@@ -5,13 +5,14 @@ import { useSelector } from "react-redux";
 
 const Collectors = () => {
   const router = useRouter()
-  const admin = useSelector((state) => state.admin.admin)
+  const isAuthenticated = useSelector((state) => state.admin.isAuthenticated)
+  
   useEffect(() => {
-    if(!admin.success) {
+    if(!isAuthenticated) {
       router.push("/")
     }
-  },[])
-
+  },[isAuthenticated]);
+  
   return <CollectorBoard />;
 }
 

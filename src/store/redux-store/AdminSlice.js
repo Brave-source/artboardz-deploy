@@ -5,6 +5,7 @@ export const adminSlice = createSlice({
   initialState: {
     admin: {},
     isFetching: false,
+    isAuthenticated: false,
     error: false,
   },
   reducers: {
@@ -16,6 +17,7 @@ export const adminSlice = createSlice({
     getAdminSuccess: (state, action) => {
       state.isFetching = false;
       state.admin = action.payload;
+      state.isAuthenticated = true;
     },
     getAdminFailure: (state) => {
       state.isFetching = false;
