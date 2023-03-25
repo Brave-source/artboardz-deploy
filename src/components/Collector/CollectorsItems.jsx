@@ -37,10 +37,10 @@ const CollectorsItems = ({
         <p>{twitter}</p>
       </div>
       <div>
-        <p>{uniqueCollection}</p>
+        <p>{uniqueCollection.length}</p>
       </div>
       <div>
-        <p>{collectionSize}</p>
+        <p>{collectionSize.length}</p>
       </div>
       <div className="w-full">
         <p

@@ -70,8 +70,8 @@ const CollectorsList = () => {
             artboardTag={data.artboardTag}
             nationality={data.nationality}
             twitter={data.twitter}
-            uniqueCollection={data.uniqueCollection}
-            collectionSize={data.collectionSize}
+            uniqueCollection={data.policyIds}
+            collectionSize={data.assets}
             display={data.display}
           />
         );
