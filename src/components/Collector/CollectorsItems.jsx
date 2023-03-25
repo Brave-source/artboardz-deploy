@@ -36,7 +36,7 @@ const CollectorsItems = ({
         <p>{nationality}</p>
       </div>
       <div>
-        <p>{twitter}</p>
+        <p>{twitter.slice(20)}</p>
       </div>
       <div>
         <p>{uniqueCollection.length}</p>
