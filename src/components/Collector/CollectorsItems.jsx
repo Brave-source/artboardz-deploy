@@ -19,6 +19,8 @@ const CollectorsItems = ({
   };
   const displayColor = display ? "bg-[#059669]" : "bg-[#DC2626]";
 
+  const nfts = collectionSize?.filter((item) => uniqueCollection?.includes(item.policyIds))
+
   return (
     <li className="grid grid-cols-9 py-5 place-items-center text-sm font-semibold tracking-wide break-word border-b border-[#AECEFF] last-of-type:border-none text-[#323A46] relative">
       <div className="w-[48px] aspect-square rounded-full">
@@ -40,7 +42,7 @@ const CollectorsItems = ({
         <p>{uniqueCollection.length}</p>
       </div>
       <div>
-        <p>{collectionSize.length}</p>
+        <p>{nfts.length}</p>
       </div>
       <div className="w-full">
         <p
