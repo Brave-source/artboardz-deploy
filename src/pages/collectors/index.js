@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 const Collectors = () => {
   const router = useRouter()
-  const isAuthenticated = useSelector((state) => state.admin.isAuthenticated)
+  const isAuthenticated = useSelector((state) => state.admin.isAuthenticated);
   
   useEffect(() => {
     if(!isAuthenticated) {
@@ -13,7 +13,7 @@ const Collectors = () => {
     }
   },[isAuthenticated]);
   
-  return <CollectorBoard />;
+  if(isAuthenticated) return <CollectorBoard />;
 }
 
 export default Collectors;

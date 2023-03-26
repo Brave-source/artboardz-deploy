@@ -6,7 +6,7 @@ import { Avatar } from "../UI/Avatar";
 const CollectorsItems = ({
   image,
   walletAddress,
-  artboardTag,
+  name,
   nationality,
   twitter,
   uniqueCollection,
@@ -19,7 +19,7 @@ const CollectorsItems = ({
   };
   const displayColor = display ? "bg-[#059669]" : "bg-[#DC2626]";
 
-  const nfts = collectionSize?.filter((item) => uniqueCollection?.includes(item.policyIds))
+  const nfts = collectionSize?.filter((item) => uniqueCollection?.includes(item.policyId))
 
   return (
     <li className="grid grid-cols-9 py-5 place-items-center text-sm font-semibold tracking-wide break-word border-b border-[#AECEFF] last-of-type:border-none text-[#323A46] relative">
@@ -30,7 +30,7 @@ const CollectorsItems = ({
         <p className="break-all">{walletAddress.slice(0,5)}...{walletAddress.slice(walletAddress.length - 4)}</p>
       </div>
       <div>
-        <p>{artboardTag}</p>
+        <p>{name}</p>
       </div>
       <div>
         <p>{nationality}</p>

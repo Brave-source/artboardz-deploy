@@ -67,7 +67,7 @@ const CollectorsList = () => {
             key={index}
             image={data.image}
             walletAddress={data.stakeAddress}
-            artboardTag={data.artboardTag}
+            name={data.name}
             nationality={data.nationality}
             twitter={data.twitter}
             uniqueCollection={data.policyIds}

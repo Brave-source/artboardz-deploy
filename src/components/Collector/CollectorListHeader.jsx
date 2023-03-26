@@ -12,7 +12,7 @@ const CollectorListHeader = () => {
           <p>Wallet Address</p> <TrafficIcon />
         </div>
         <div className="flex gap-2 items-center">
-          <p>Artboarbz Tag</p> <TrafficIcon />
+          <p>Name</p> <TrafficIcon />
         </div>
         <div>
           <p>Nationality</p>

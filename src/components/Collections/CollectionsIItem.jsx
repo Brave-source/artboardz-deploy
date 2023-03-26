@@ -8,6 +8,7 @@ import EditCollectionForm from "./EditCollectionForm";
 import Notiflix from "notiflix";
 import axios from "axios";
 import { deleteCollectionFailure, deleteCollectionStart, deleteCollectionSuccess } from "../../store/redux-store/CollectionSlice";
+import { baseURL } from "../../utils/url";
 
 const CollectionItem = ({
   Policy,
@@ -47,7 +48,7 @@ const CollectionItem = ({
   const deleteCollection = async(id) => {
     dispatch(deleteCollectionStart())
     try {
-      const res = await axios.delete(`http://localhost:3000/api/collections/${id}`);
+      const res = await axios.delete(`${baseURL}/api/collections/${id}`);
       console.log(res.data)
       dispatch(deleteCollectionSuccess(id))
     }catch(err){

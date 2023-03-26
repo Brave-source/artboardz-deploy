@@ -18,7 +18,6 @@ import { useDispatch } from "react-redux";
 import CancelIcon from "../../Assets/Icons/CancelIcon";
 import { UIActions } from "../../store/redux-store/UI-slice";
 
-
 const EditCollectionForm = ({ id, setIsOpen }) => {
   const dispatch = useDispatch();
   const hideFormHandler = (evt) => {

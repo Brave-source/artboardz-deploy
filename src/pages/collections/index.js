@@ -13,7 +13,7 @@ const Collections = () => {
     }
   },[isAuthenticated])
 
-  return <CollectionBoard />;
+  if(isAuthenticated === "true") return <CollectionBoard />;
 }
 
 export default Collections;
