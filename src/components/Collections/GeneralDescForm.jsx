@@ -134,7 +134,7 @@ const GeneralDescForm = () => {
     }
   };
 
-
+console.log(inputs)
   return (
     <form className="grid grid-cols-3 gap-4" onSubmit={formSubmitHandler}>
       <div className="flex flex-col">

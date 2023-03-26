@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 const Collections = () => {
   const router = useRouter()
   const isAuthenticated = useSelector((state) => state.admin.isAuthenticated)
+  console.log(isAuthenticated)
   
   useEffect(() => {
     if(!isAuthenticated) {
@@ -13,7 +14,7 @@ const Collections = () => {
     }
   },[isAuthenticated])
 
-  if(isAuthenticated === "true") return <CollectionBoard />;
+  if(isAuthenticated) return <CollectionBoard />;
 }
 
 export default Collections;

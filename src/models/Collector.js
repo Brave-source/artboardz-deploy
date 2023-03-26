@@ -29,14 +29,6 @@ const UserSchema = mongoose.Schema({
         type: Boolean,
         default: true
     },
-    collectionSize: {
-        type: Number,
-        default: 0
-    },
-    uniqueCollection: {
-        type: Number,
-        default: 0
-    },
     units: {
         type: [String],
         default: []
