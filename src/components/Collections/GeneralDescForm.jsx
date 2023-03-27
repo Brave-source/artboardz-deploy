@@ -134,7 +134,6 @@ const GeneralDescForm = () => {
     }
   };
 
-console.log(inputs)
   return (
     <form className="grid grid-cols-3 gap-4" onSubmit={formSubmitHandler}>
       <div className="flex flex-col">
@@ -395,7 +394,7 @@ console.log(inputs)
           name="ArtImage"
           id="Artboard image"
           onChange={(e) => setBanner(e.target.files[0])}
-          accept="image/png, image/jpeg image/jpg"
+          accept="image/*"
           hidden
         />
       </div>
@@ -421,7 +420,7 @@ console.log(inputs)
           name="Artboard location image"
           id="Artboard location image"
           onChange={(e) => setArtist(e.target.files[0])}
-          accept="image/png, image/jpeg"
+          accept="image/*"
           hidden
         />
       </div>
@@ -447,7 +446,7 @@ console.log(inputs)
           name="personal/working image"
           id="personal/working image"
           onChange={(e) => setdigitalArtboard(e.target.files[0])}
-          accept="image/png, image/jpeg"
+          accept="image/*"
           hidden
         />
       </div>
@@ -473,7 +472,7 @@ console.log(inputs)
           name="Physical Artboard"
           id="Physical Artboard"
           onChange={(e) => setphysicalArtboard(e.target.files[0])}
-          accept="image/png, image/jpeg"
+          accept="image/*"
           hidden
         />
       </div>

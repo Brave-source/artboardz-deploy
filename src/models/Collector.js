@@ -29,8 +29,29 @@ const UserSchema = mongoose.Schema({
         type: Boolean,
         default: true
     },
-    units: {
-        type: [String],
+    assets: {
+        type: [{
+            name: {
+                type: String,
+                required: true
+            },
+            image: {
+                type: String,
+                required: true
+            },
+            policyId: {
+                type: String,
+                required: true
+            },
+            quantity: {
+                type: Number,
+                default: 1
+            },
+            unit: {
+                type: String,
+                required: true
+            }
+        }],
         default: []
     },
     policyIds: {
