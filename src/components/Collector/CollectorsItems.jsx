@@ -2,6 +2,7 @@ import { useState } from "react";
 import CancelIcon from "../../Assets/Icons/CancelIcon";
 import OptionsIcon from "../../Assets/Icons/Options";
 import { Avatar } from "../UI/Avatar";
+import CloseIcon from '@mui/icons-material/Close';
 
 const CollectorsItems = ({
   image,
@@ -55,10 +56,11 @@ const CollectorsItems = ({
         <OptionsIcon />
       </button>
       {actionsPanelIsShown && (
-        <div className="absolute top-20 right-0 rounded border border-black p-5 bg-white space-y-3 z-50">
+        <div className="absolute  right-0 rounded border border-black p-5 bg-white space-y-3 z-50">
           <p className="flex gap-2 items-center">
             Display User
             <input type="checkbox" className="toggle toggle-xs" />
+            <CloseIcon onClick={toggleActionHandler} className="relative bottom-4 left-4"/>
           </p>
           <button>
           <p>Delete User</p>
