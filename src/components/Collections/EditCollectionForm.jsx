@@ -14,11 +14,12 @@
 import React, { useState } from "react";
 import Form from "../UI/Form";
 import EditForm from './EditForm'
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CancelIcon from "../../Assets/Icons/CancelIcon";
 import { UIActions } from "../../store/redux-store/UI-slice";
 
 const EditCollectionForm = ({ id, setIsOpen }) => {
+  const collection = useSelector((collection) => collection.collection.collections.filter((item) => item._id === id)[0]);
   const dispatch = useDispatch();
   const hideFormHandler = (evt) => {
     evt.preventDefault();
@@ -36,7 +37,7 @@ const EditCollectionForm = ({ id, setIsOpen }) => {
       </button>
     </header>
     <main>
-      <EditForm id={id} setIsOpen={setIsOpen}/>
+      <EditForm id={id} setIsOpen={setIsOpen} collection={collection}/>
     </main>
   </div>
   );

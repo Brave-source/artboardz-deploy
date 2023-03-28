@@ -13,10 +13,10 @@ import axios from 'axios';
 import validation from "./FormValidation";
 import CameraIcon from "../../Assets/Icons/CameraIcon";
 import { baseURL } from "../../utils/url";
-import { UIActions } from "../../store/redux-store/UI-slice";
+import { AddCollectionFormIsShown, UIActions } from "../../store/redux-store/UI-slice";
 import { updateCollectionFailure, updateCollectionStart, updateCollectionSuccess } from "../../store/redux-store/CollectionSlice";
 
-const GeneralDescForm = ({ id, setIsOpen }) => {
+const GeneralDescForm = ({ id, setIsOpen, collection }) => {
  
   const [inputs, setInputs] = useState({});
   const [errors, setErrors] = useState({});
@@ -33,8 +33,26 @@ const GeneralDescForm = ({ id, setIsOpen }) => {
 
   const dispatch = useDispatch();
 
-  const collection = useSelector((collection) => collection.collection.collections.filter((item) => item._id === id)[0]);
+  // const collection = useSelector((collection) => collection.collection.collections.filter((item) => item._id === id)[0]);
   const { isFetching } = useSelector((collection) => collection.collection);
+  const [policy, setPolicy] = useState(collection.policy);
+  const [price, setPrice] = useState(collection.price);
+  const [supply, setSupply] = useState(collection.supply)
+  const [mintDate, setMintDate] = useState(collection.mintDate)
+  const [aboutMe, setAboutMe] = useState(collection.aboutMe)
+  const [country, setCountry] = useState(collection.country)
+  const [city, setCity] = useState(collection.city)
+  const [twitter, setTwitter] = useState(collection.twitter)
+  const [title, setTitle] = useState(collection.title)
+  const [name, setName] = useState(collection.name)
+  const [artDesc, setArtDesc] = useState(collection.artDesc)
+  const [instagram, setInstagram] = useState(collection.instagram)
+  const [discord, setDiscord] = useState(collection.discord)
+  const [newRelease, setNewRelease] = useState(collection.newRelease)
+  const [jpgLink, setJpgLink] = useState(collection.jpgLink)
+  const [nmkrLink, setNmkrLink] = useState(collection.nmkrLink)
+  const [mintingDetails, setMintingDetails] = useState(collection.mintingDetails)
+  const [royalty, setRoyalty] = useState(collection.royalty)
   
   const hideFormHandler = (evt) => {
     evt.preventDefault();
@@ -95,10 +113,7 @@ const GeneralDescForm = ({ id, setIsOpen }) => {
     if (physicalArtboard) {
       setphysicalArtboardUrl(URL.createObjectURL(physicalArtboard));
     }
-    console.log("BannerUrl: ", BannerUrl)
-    console.log("ArtistUrl", ArtistUrl)
-    console.log("digitalArtboardUrl: ", digitalArtboardUrl)
-    console.log("physicalArtboardUrl: ", physicalArtboardUrl)
+  
   }, [Banner, Artist, digitalArtboard, physicalArtboard]);
 
   useEffect(() => {
@@ -116,30 +131,33 @@ const GeneralDescForm = ({ id, setIsOpen }) => {
   useEffect(() => {
     physicalArtboard && uploadFile(physicalArtboard, "physicalArtUrl");
   }, [physicalArtboard]);
+
   const updateInput  = {
     bannerUrl: inputs.bannerUrl ? inputs.bannerUrl : collection.bannerUrl,
     artistUrl: inputs.artistUrl ? inputs.artistUrl : collection.artistUrl,
-    aboutMe: inputs.aboutMe ? inputs.aboutMe : collection.aboutMe,
-    mintDate: inputs.mintDate ? inputs.mintDate : collection.mintDate,
-    mintingDetails: inputs.mintingDetails ? inputs.mintingDetails : collection.mintingDetails,
-    country: inputs.country ? inputs.country : collection.country,
-    city: inputs.city ? inputs.city : collection.city,
     physicalArtUrl: inputs.physicalArtUrl ? inputs.physicalArtUrl : collection.physicalArtUrl,
     digitalArtUrl: inputs.digitalArtUrl ? inputs.digitalArtUrl : collection.digitalArtUrl,
-    discord: inputs.discord ? inputs.discord : collection.discord,
-    twitter: inputs.twitter ? inputs.twitter : collection.twitter,
-    instagram: inputs.instagram ? inputs.instagram : collection.instagram,
-    name: inputs.name ? inputs.name : collection.name,
-    newRelease: inputs.newRelease? inputs.newRelease : collection.newRelease,
-    jpgLink: inputs.jpgLink? inputs.jpgLink : collection.jpgLink,
-    nmkrLink: inputs.nmkrLink ? inputs.nmkrLink : collection.nmkrLink,
-    policy: inputs.policy ? inputs.policy : collection.policy,
-    price: inputs.price ? inputs.price : collection.price,
-    royalty: inputs.royalty ? inputs.royalty : collection.royalty,
-    supply: inputs.supply ? inputs.supply : collection.supply,
-    title: inputs.title ? inputs.title : collection.title,
+    aboutMe,
+    mintDate,
+    mintingDetails,
+    country,
+    city,
+    discord,
+    twitter,
+    instagram,
+    name,
+    newRelease,
+    jpgLink,
+    nmkrLink,
+    policy,
+    price,
+    royalty,
+    supply,
+    title,
+    artDesc,
     _id: id
   }
+  console.log(updateInput)
   const formSubmitHandler = async (evt) => {
     evt.preventDefault();
     // setErrors(validation(updateInput));
@@ -168,8 +186,8 @@ const GeneralDescForm = ({ id, setIsOpen }) => {
         name="policy"
         id="policy"
         disabled
-        onChange={handleChange}
-        placeholder={collection.policy}
+        onChange={(e) => setPolicy(e.target.value)}
+        value={policy}
         className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
       />
     </div>
@@ -182,8 +200,8 @@ const GeneralDescForm = ({ id, setIsOpen }) => {
         type="text"
         name="title"
         id="Artboard Title"
-        onChange={handleChange}
-        placeholder={collection.title}
+        onChange={(e) => setTitle(e.target.value)}
+        value={title}
         className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
       />
     </div>
@@ -195,8 +213,8 @@ const GeneralDescForm = ({ id, setIsOpen }) => {
         type="text"
         name="name"
         id="Artist name"
-        onChange={handleChange}
-        placeholder={collection.name}
+        onChange={(e)=> setName(e.target.value)}
+        value={name}
         className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
       />
     </div>
@@ -208,8 +226,8 @@ const GeneralDescForm = ({ id, setIsOpen }) => {
         type="text"
         name="mintDate"
         id="Artist name"
-        onChange={handleChange}
-        placeholder={collection.mintDate}
+        onChange={(e)=> setMintDate(e.target.value)}
+        value={mintDate}
         className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
       />
     </div>
@@ -221,8 +239,8 @@ const GeneralDescForm = ({ id, setIsOpen }) => {
         type="text"
         name="price"
         id="Artist name"
-        onChange={handleChange}
-        placeholder={collection.price}
+        onChange={(e)=> setPrice(e.target.value)}
+        value={price}
         className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
       />
     </div>
@@ -235,8 +253,8 @@ const GeneralDescForm = ({ id, setIsOpen }) => {
         type="text"
         name="supply"
         id="Supply"
-        onChange={handleChange}
-        placeholder={collection.supply}
+        onChange={(e)=> setSupply(e.target.value)}
+        value={supply}
         className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
       />
     </div>
@@ -248,8 +266,8 @@ const GeneralDescForm = ({ id, setIsOpen }) => {
         type="text"
         name="royalty"
         id="Royalty"
-        onChange={handleChange}
-        placeholder={collection.royalty}
+        onChange={(e)=> setRoyalty(e.target.value)}
+        value={royalty}
         className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
       />
     </div>
@@ -257,16 +275,29 @@ const GeneralDescForm = ({ id, setIsOpen }) => {
       <label htmlFor="New Release" className="text-[#B3B5BD] text-base">
         New Release
       </label>
-      <select
+      {collection.newRelease > 0 ? (
+        <select
         name="newRelease"
         id="New Release"
-        onChange={handleChange}
-        placeholder={collection.newRelease}
+        onChange={(e)=> setNewRelease(e.target.value)}
+        placeholder={newRelease}
         className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
       >
         <option value="1">Yes</option>
         <option value="0">No</option>
         </select>
+      ): (
+        <select
+        name="newRelease"
+        id="New Release"
+        onChange={(e)=> setNewRelease(e.target.value)}
+        placeholder={newRelease}
+        className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
+      >
+        <option value="0">No</option>
+        <option value="1">Yes</option>
+        </select>
+      )}
     </div>
     <div></div>
     <div className="flex flex-col">
@@ -277,8 +308,8 @@ const GeneralDescForm = ({ id, setIsOpen }) => {
         type="text"
         name="country"
         id="Royalty"
-        onChange={handleChange}
-        placeholder={collection.country}
+        onChange={(e)=> setCountry(e.target.value)}
+        value={country}
         className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
       />
     </div>
@@ -290,8 +321,8 @@ const GeneralDescForm = ({ id, setIsOpen }) => {
         type="text"
         name="city"
         id="City"
-        onChange={handleChange}
-        placeholder={collection.city}
+        onChange={(e)=> setCity(e.target.value)}
+        value={city}
         className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
       />
     </div>
@@ -304,8 +335,8 @@ const GeneralDescForm = ({ id, setIsOpen }) => {
         type="text"
         name="nmkrLink"
         id="NMKR"
-        onChange={handleChange}
-        placeholder={collection.nmkrLink}
+        onChange={(e)=> setNmkrLink(e.target.value)}
+        value={nmkrLink}
         className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
       />
     </div>
@@ -317,8 +348,8 @@ const GeneralDescForm = ({ id, setIsOpen }) => {
         type="text"
         name="jpgLink"
         id="JPG"
-        onChange={handleChange}
-        placeholder={collection.jpgLink}
+        onChange={(e)=> setJpgLink(e.target.value)}
+        value={jpgLink}
         className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
       />
     </div>
@@ -334,8 +365,8 @@ const GeneralDescForm = ({ id, setIsOpen }) => {
         rows={5}
         name="artDesc"
         id="Artboard Description"
-        onChange={handleChange}
-        placeholder={collection.artDesc}
+        onChange={(e)=> setArtDesc(e.target.value)}
+        value={artDesc}
         className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md text-base px-3"
       />
     </div>
@@ -347,8 +378,8 @@ const GeneralDescForm = ({ id, setIsOpen }) => {
         rows={5}
         name="aboutMe"
         id=" about me"
-        onChange={handleChange}
-        placeholder={collection.aboutMe}
+        onChange={(e)=> setAboutMe(e.target.value)}
+        value={aboutMe}
         className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline h-[150px] rounded-md text-base px-3"
       />
     </div>
@@ -360,8 +391,8 @@ const GeneralDescForm = ({ id, setIsOpen }) => {
         rows={5}
         name="mintingDetails"
         id="Minting details"
-        onChange={handleChange}
-        placeholder={collection.mintingDetails}
+        onChange={(e)=> setMintingDetails(e.target.value)}
+        value={mintingDetails}
         className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline h-[150px] rounded-md  text-base px-3"
       />
     </div>
@@ -374,8 +405,8 @@ const GeneralDescForm = ({ id, setIsOpen }) => {
           type="url"
           name="twitter"
           id="Twitter"
-          onChange={handleChange}
-          placeholder={collection.twitter}
+          onChange={(e)=> setTwitter(e.target.value)}
+          value={twitter}
           className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
         />
         {errors.twitter && <p className="text-red-400">{errors.twitter}</p>}
@@ -388,8 +419,8 @@ const GeneralDescForm = ({ id, setIsOpen }) => {
           type="url"
           name="discord"
           id="Discord"
-          onChange={handleChange}
-          placeholder={collection.discord}
+          onChange={(e)=> setDiscord(e.target.value)}
+          value={discord}
           className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
         />
         {errors.discord && <p className="text-red-400">{errors.discord}</p>}
@@ -402,8 +433,8 @@ const GeneralDescForm = ({ id, setIsOpen }) => {
           type="url"
           name="instagram"
           id="Instagram"
-          onChange={handleChange}
-          placeholder={collection.instagram}
+          onChange={(e)=> setInstagram(e.target.value)}
+          value={instagram}
           className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
         />
         {errors.instagram && <p className="text-red-400">{errors.instagram}</p>}
