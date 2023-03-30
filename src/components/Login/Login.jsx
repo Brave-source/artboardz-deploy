@@ -3,17 +3,27 @@ import {Box, Button} from '@mui/material'
 import { useEffect } from "react";
 import { Buffer } from "buffer";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getNFTById, getNFTsForAddress } from '../../utils/blockfrost';
 import { getAdminFailure, getAdminStart, getAdminSuccess } from "../../store/redux-store/AdminSlice";
 import { useRouter } from "next/router";
 import { useAddress, useWallet } from '@meshsdk/react';
 import { baseURL } from '../../utils/url';
 
+
 const Login = () => {
 
   const dispatch = useDispatch()
   const router = useRouter()
+
+  const isAuthenticated = useSelector((state) => state.admin.isAuthenticated)
+  
+  useEffect(() => {
+    if(isAuthenticated) {
+      router.push("/collections")
+    }
+  },[isAuthenticated, router]);
+
   let csl, wallet;
 
 useEffect(() => {
