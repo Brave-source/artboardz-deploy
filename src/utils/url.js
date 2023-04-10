@@ -6,3 +6,5 @@ export const baseURL = "https://admin.artboardz.net";
 //   window.location.hostname.includes("192")
 //     ? dev
 //     : prod;
+
+// const base = window.location.hostname.substring(0,3) == "www" ? "https://admin.artboardz.net" : "https://admin.artboardz.net"

@@ -3,7 +3,7 @@ import { Avatar } from "../UI/Avatar";
 import { CardanoWallet, MeshBadge } from "@meshsdk/react";
 
 export const Header = () => {
-   console.log(window.location)
+   console.log(window.location.hostname.substring(0,3))
    console.log(window.origin)
   return (
     <header className="col-span-full h-full bg-[#14171F] py-[10px] px-[32px] flex justify-between items-center">

@@ -45,12 +45,14 @@ const DUMMY_DATA = [
 const CollectorsList = () => {
   const dispatch = useDispatch()
   const collectors = useSelector((collector) => collector.collector.collectors)
+  const externalURL = "https://www.admin.artboardz.net"
+  const globalURL = window.location.hostname.substring(0,3).toLocaleLowerCase()
   
   useEffect(() => {
     const getCollectors = async() => {
       dispatch(getCollectorStart());
       try {
-        const res = await axios.get(`${baseURL}/api/collectors`);
+        const res = await axios.get(  globalURL == "www" ? `${externalURL}/api/collectors` : `${baseURL}/api/collectors`);
         dispatch(getCollectorSuccess(res.data));
       }catch(err) {
         dispatch(getCollectorFailure())
