@@ -8,6 +8,7 @@ import axios from "axios";
 import Notiflix from "notiflix";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import { baseURL } from "../../utils/url";
 
 const CollectorsItems = ({
   image,
@@ -62,7 +63,6 @@ const CollectorsItems = ({
     }catch(err){
       dispatch(deleteCollectorFailure())
       toast.error("Something went wrong")
-      console.log(err)
     }
   }
   return (
