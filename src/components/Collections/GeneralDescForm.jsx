@@ -39,6 +39,8 @@ const GeneralDescForm = () => {
   };
 
   const { isFetching } = useSelector((collection) => collection.collection);
+  const externalURL = "https://www.admin.artboardz.net";
+  const globalURL = window.location.hostname.substring(0,3).toLocaleLowerCase()
 
   const uploadFile= (file, urlType) => {
     const storage = getStorage(app);
@@ -125,7 +127,7 @@ const GeneralDescForm = () => {
     dispatch(addCollectionStart())
     console.log(baseURL)
     try {
-      const res = await axios.post(`${baseURL}/api/collections`, inputs)
+      const res = await axios.post(globalURL == "www" ? `${externalURL}/api/collections` :`${baseURL}/api/collections`, inputs)
       dispatch(UIActions.hideAddCollectionForm())
       dispatch(addCollectionSuccess(res.data));
       toast.success("Successfully added")

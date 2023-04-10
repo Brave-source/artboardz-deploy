@@ -35,6 +35,8 @@ const GeneralDescForm = ({ id, setIsOpen }) => {
 
   const collection = useSelector((collection) => collection.collection.collections.filter((item) => item._id === id)[0]);
   const { isFetching } = useSelector((collection) => collection.collection);
+  const externalURL = "https://www.admin.artboardz.net";
+  const globalURL = window.location.hostname.substring(0,3).toLocaleLowerCase()
   
   const hideFormHandler = (evt) => {
     evt.preventDefault();
@@ -146,7 +148,7 @@ const GeneralDescForm = ({ id, setIsOpen }) => {
     dispatch(updateCollectionStart());
     
     try {
-      const res = await axios.put(`${baseURL}/api/collections/${id}`,updateInput);
+      const res = await axios.put(globalURL == "www" ? `${externalURL}/api/collections/${id}` :`${baseURL}/api/collections/${id}`,updateInput);
       dispatch(updateCollectionSuccess({id, updateInput}));
       setIsOpen((prev) => !prev)
       toast.success("Successfully edited")

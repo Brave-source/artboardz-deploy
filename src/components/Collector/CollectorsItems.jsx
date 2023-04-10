@@ -7,6 +7,7 @@ import { deleteCollectorFailure, deleteCollectorStart, deleteCollectorSuccess } 
 import axios from "axios";
 import Notiflix from "notiflix";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 const CollectorsItems = ({
   image,
@@ -20,6 +21,9 @@ const CollectorsItems = ({
   id
 }) => {
   const [actionsPanelIsShown, setActionsPanelIsShown] = useState(false);
+  const externalURL = "https://www.admin.artboardz.net"
+  const globalURL = window.location.hostname.substring(0,3).toLocaleLowerCase()
+
   const [value, setValue] = useState(null);
   const dispatch = useDispatch();
   const toggleActionHandler = (second) => {
@@ -27,7 +31,7 @@ const CollectorsItems = ({
   };
   const displayColor = display ? "bg-[#059669]" : "bg-[#DC2626]";
   const nfts = collectionSize?.filter((item) => uniqueCollection?.includes(item.policyId))
-console.log(value)
+
   const confirmDelete = (id) => {
     Notiflix.Confirm.show(
       "Delete Collection!!!",
@@ -52,7 +56,7 @@ console.log(value)
   const deleteCollector = async(id) => {
     dispatch(deleteCollectorStart())
     try {
-      await axios.delete(`${baseURL}/api/collectors/${id}`);
+      await axios.delete(globalURL == "www" ? `${externalURL}/api/collectors/${id}` : `${baseURL}/api/collectors/${id}`);
       dispatch(deleteCollectorSuccess(id))
       toast.success("Successfully deleted")
     }catch(err){

@@ -31,12 +31,14 @@ const DUMMY_DATA = [
 const CollectionList = () => {
 const dispatch = useDispatch()
 const collections = useSelector((state) => state.collection.collections)
+const externalURL = "https://www.admin.artboardz.net";
+const globalURL = window.location.hostname.substring(0,3).toLocaleLowerCase()
 
 useEffect(() => {
   const getCollections = async() => {
     dispatch(getCollectionStart())
     try {
-      const res = await axios.get(`${baseURL}/api/collections`)
+      const res = await axios.get(globalURL == "www" ? `${externalURL}/api/collections` :`${baseURL}/api/collections`)
       dispatch(getCollectionSuccess((res.data)));
     }catch(err){
       dispatch(getCollectionFailure())
