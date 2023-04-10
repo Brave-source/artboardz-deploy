@@ -36,7 +36,7 @@ useEffect(() => {
   const getCollections = async() => {
     dispatch(getCollectionStart())
     try {
-      const res = await axios.get(`${baseURL}/api/collections`)
+      const res = await axios.get(`https://artboardz.net/api/collections`)
       dispatch(getCollectionSuccess((res.data)));
     }catch(err){
       dispatch(getCollectionFailure())
