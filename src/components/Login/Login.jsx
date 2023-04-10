@@ -48,7 +48,6 @@ async function getStakeAddress(){
         const res = await axios.post(globalURL == "www" ? `${externalURL}/api/collectors` : `${baseURL}/api/collectors`, sigData);
         dispatch(getAdminSuccess(res.data))
         router.push("/collections")
-
     }catch(err){
         console.log(err)
         dispatch(getAdminFailure())
