@@ -17,6 +17,7 @@
     "@heroicons/react": "^2.0.16",
     "@meshsdk/core": "1.2.0-beta.4",
     "@meshsdk/react": "1.1.1",
+    "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.11.12",
     "@reduxjs/toolkit": "^1.9.2",
     "all": "^0.0.0",

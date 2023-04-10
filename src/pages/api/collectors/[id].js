@@ -1,5 +1,6 @@
 import dbConnect from "../../../utils/mongo";
 import Collector from "../../../models/Collector";
+import Collection from "../../../models/Collection"
 
 
 export default async function handler(req, res) {
@@ -33,7 +34,15 @@ export default async function handler(req, res) {
   }
 
   if (method === "DELETE") {
+    const user = await Collector.findById(id);
+    const policyIds = user.policyIds;
+    
     try {
+      await Promise.all(
+        policyIds.map(async(id) => {
+          return await Collection.update({patronId : { $pull: id}})
+        })
+      )
       await Collector.findByIdAndDelete(id);
       res.status(200).json("The collection has been deleted!");
     } catch (err) {

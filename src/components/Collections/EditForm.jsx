@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 import axios from 'axios';
 import validation from "./FormValidation";
 import CameraIcon from "../../Assets/Icons/CameraIcon";
+import { baseURL } from "../../utils/url";
 import { UIActions } from "../../store/redux-store/UI-slice";
 import { updateCollectionFailure, updateCollectionStart, updateCollectionSuccess } from "../../store/redux-store/CollectionSlice";
 
@@ -145,7 +146,7 @@ const GeneralDescForm = ({ id, setIsOpen }) => {
     dispatch(updateCollectionStart());
     
     try {
-      const res = await axios.put(`http://localhost:3000/api/collections/${id}`,updateInput);
+      const res = await axios.put(`${baseURL}/api/collections/${id}`,updateInput);
       dispatch(updateCollectionSuccess({id, updateInput}));
       setIsOpen((prev) => !prev)
       toast.success("Successfully edited")

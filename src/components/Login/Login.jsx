@@ -8,6 +8,7 @@ import { getNFTById, getNFTsForAddress } from '../../utils/blockfrost';
 import { getAdminFailure, getAdminStart, getAdminSuccess } from "../../store/redux-store/AdminSlice";
 import { useRouter } from "next/router";
 import { useAddress, useWallet } from '@meshsdk/react';
+import { baseURL } from '../../utils/url';
 
 const Login = () => {
 
@@ -38,14 +39,14 @@ async function getStakeAddress(){
         const address = await getStakeAddress();
         // console.log(address[1]);
         // const resdata = await getNFTById("addr_test1qzww627ztazsdfrp6sty9tadyrrktl532ea52kt8r942awhtpewhzlzckjny2004lzf2ct229ykw9gug30shpl5q0y9sc67s8a", "07f40263969617defb3d50aaf54c822e95f814af8ea75ae89aa133b5")
-        const resdata = await getNFTsForAddress("addr_test1qrqhkcyjywzr5jhyaf587yyydg6369zam8urw8wpkyxr5p9drr2zf0whzt4quk03egdn4yaesm29288k0t56uz2qavtsjdux8d");
-        console.log(resdata)
-        // const messageUtf = `account: ${stakeAddrBech32}`;
-        // const messageHex = Buffer.from(messageUtf).toString("hex");    
-        // const sigData = await wallet.signData(stakeAddrHex, messageHex);
-        // const res = await axios.post("http://localhost:3000/api/collectors", sigData);
-        // dispatch(getAdminSuccess(res.data))
-        
+        // const resdata = await getNFTsForAddress("addr_test1qrqhkcyjywzr5jhyaf587yyydg6369zam8urw8wpkyxr5p9drr2zf0whzt4quk03egdn4yaesm29288k0t56uz2qavtsjdux8d");
+        // console.log(resdata)
+        const messageUtf = `account: ${stakeAddrBech32}`;
+        const messageHex = Buffer.from(messageUtf).toString("hex");    
+        const sigData = await wallet.signData(stakeAddrHex, messageHex);
+        const res = await axios.post(`${baseURL}/api/collectors`, sigData);
+        dispatch(getAdminSuccess(res.data))
+        router.push("/collections")
 
     }catch(err){
         console.log(err)
