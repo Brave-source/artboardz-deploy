@@ -25,6 +25,8 @@ const GeneralDescForm = () => {
   const [digitalArtboard, setdigitalArtboard] = useState(null);
   const [physicalArtboard, setphysicalArtboard] = useState(null);
   const dispatch = useDispatch();
+  const externalURL = "https://www.admin.artboardz.net"
+  const globalURL = window.location.hostname.substring(0,3).toLocaleLowerCase()
 
   // image preview
   const [BannerUrl, setBannerUrl] = useState(null);
@@ -39,8 +41,6 @@ const GeneralDescForm = () => {
   };
 
   const { isFetching } = useSelector((collection) => collection.collection);
-  const externalURL = "https://www.admin.artboardz.net";
-  const globalURL = window.location.hostname.substring(0,3).toLocaleLowerCase()
 
   const uploadFile= (file, urlType) => {
     const storage = getStorage(app);
@@ -123,9 +123,8 @@ const GeneralDescForm = () => {
 
   const formSubmitHandler = async(evt) => {
     evt.preventDefault();
-    setErrors(validation(inputs))
+    // setErrors(validation(inputs))
     dispatch(addCollectionStart())
-    console.log(baseURL)
     try {
       const res = await axios.post(globalURL == "www" ? `${externalURL}/api/collections` :`${baseURL}/api/collections`, inputs)
       dispatch(UIActions.hideAddCollectionForm())
@@ -134,10 +133,8 @@ const GeneralDescForm = () => {
     }catch(err) {
       dispatch(addCollectionFailure())
       toast.error("Error! something went wrong")
-      console.log(err)
     }
   };
-
 
   return (
     <form className="grid grid-cols-3 gap-4" onSubmit={formSubmitHandler}>
@@ -399,7 +396,7 @@ const GeneralDescForm = () => {
           name="ArtImage"
           id="Artboard image"
           onChange={(e) => setBanner(e.target.files[0])}
-          accept="image/png, image/jpeg image/jpg"
+          accept="image/*"
           hidden
         />
       </div>
@@ -425,7 +422,7 @@ const GeneralDescForm = () => {
           name="Artboard location image"
           id="Artboard location image"
           onChange={(e) => setArtist(e.target.files[0])}
-          accept="image/png, image/jpeg"
+          accept="image/*"
           hidden
         />
       </div>
@@ -451,7 +448,7 @@ const GeneralDescForm = () => {
           name="personal/working image"
           id="personal/working image"
           onChange={(e) => setdigitalArtboard(e.target.files[0])}
-          accept="image/png, image/jpeg"
+          accept="image/*"
           hidden
         />
       </div>
@@ -477,7 +474,7 @@ const GeneralDescForm = () => {
           name="Physical Artboard"
           id="Physical Artboard"
           onChange={(e) => setphysicalArtboard(e.target.files[0])}
-          accept="image/png, image/jpeg"
+          accept="image/*"
           hidden
         />
       </div>
