@@ -49,7 +49,6 @@ async function getStakeAddress(){
         dispatch(getAdminSuccess(res.data))
         router.push("/collections")
     }catch(err){
-        console.log(err)
         dispatch(getAdminFailure())
     }
 

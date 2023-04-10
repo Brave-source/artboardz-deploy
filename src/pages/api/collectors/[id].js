@@ -36,17 +36,18 @@ export default async function handler(req, res) {
   if (method === "DELETE") {
     const user = await Collector.findById(id);
     const policyIds = user.policyIds;
-    
+    console.log(policyIds)
     try {
       await Promise.all(
         policyIds.map(async(id) => {
-          return await Collection.update({patronId : { $pull: id}})
+          return await Collection.updateMany({ $pull: {patronId: id}})
         })
       )
       await Collector.findByIdAndDelete(id);
       res.status(200).json("The collection has been deleted!");
     } catch (err) {
       res.status(500).json(err);
+      console.log(err)
     }
   }
 }

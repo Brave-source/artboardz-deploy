@@ -52,7 +52,8 @@ const CollectorsList = () => {
     const getCollectors = async() => {
       dispatch(getCollectorStart());
       try {
-        const res = await axios.get(  globalURL == "www" ? `${externalURL}/api/collectors` : `${baseURL}/api/collectors`);
+        // globalURL == "www" ? `${externalURL}/api/collectors` : `${baseURL}/api/collectors`
+        const res = await axios.get(globalURL == "www" ? `${externalURL}/api/collectors` : `${baseURL}/api/collectors`);
         dispatch(getCollectorSuccess(res.data));
       }catch(err) {
         dispatch(getCollectorFailure())

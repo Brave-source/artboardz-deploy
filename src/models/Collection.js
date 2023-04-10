@@ -53,7 +53,7 @@ const CollectionSchema = new mongoose.Schema({
         type: Number,
         default: 0,
     },
-    desc: {
+    artDesc: {
         type: String,
         required: false
     },
