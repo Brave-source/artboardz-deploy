@@ -62,6 +62,7 @@ const CollectorsItems = ({
     }catch(err){
       dispatch(deleteCollectorFailure())
       toast.error("Something went wrong")
+      console.log(err)
     }
   }
   return (
