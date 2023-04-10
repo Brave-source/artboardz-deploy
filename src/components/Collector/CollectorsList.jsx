@@ -50,7 +50,7 @@ const CollectorsList = () => {
     const getCollectors = async() => {
       dispatch(getCollectorStart());
       try {
-        const res = await axios.get(`${baseURL}/api/collectors`);
+        const res = await axios.get(`http://admin.artboardz.net/api/collectors`);
         dispatch(getCollectorSuccess(res.data));
       }catch(err) {
         dispatch(getCollectorFailure())
