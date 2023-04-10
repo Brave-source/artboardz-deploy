@@ -56,7 +56,7 @@ const CollectorsItems = ({
   const deleteCollector = async(id) => {
     dispatch(deleteCollectorStart())
     try {
-      await axios.delete(globalURL == "www" ? `${externalURL}/api/collectors/${id}` : `${baseURL}/api/collectors/${id}`);
+      await axios.delete(globalURL == "www" ? `${externalURL}/api/collectors/${id}`:`${baseURL}/api/collectors/${id}`);
       dispatch(deleteCollectorSuccess(id))
       toast.success("Successfully deleted")
     }catch(err){
@@ -67,7 +67,7 @@ const CollectorsItems = ({
   return (
     <li className="grid grid-cols-9 py-5 place-items-center text-sm font-semibold tracking-wide break-word border-b border-[#AECEFF] last-of-type:border-none text-[#323A46] relative">
     <div className="w-[48px] aspect-square rounded-full">
-      <Avatar image={image ? image : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvFFG-hAuwWCF1wpo8rDXVEfoFI4_MTg0V8Q&usqp=CAU"} />
+      <Avatar image={image ? image : "https://firebasestorage.googleapis.com/v0/b/cardano-d265c.appspot.com/o/defaultProfile.png?alt=media&token=a2172f23-507f-4e25-a64d-beb767d9d0f3"} />
     </div>
     <div>
       <p className="break-all">{walletAddress.slice(0,5)}...{walletAddress.slice(walletAddress.length - 4)}</p>

@@ -8,7 +8,7 @@ export const Header = () => {
     <header className="col-span-full h-full bg-[#14171F] py-[10px] px-[32px] flex justify-between items-center">
       <h1 className="text-white text-2xl tracking-wide">Admin Panel</h1>
       <div className="w-12 aspect-square">
-        <Avatar image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvFFG-hAuwWCF1wpo8rDXVEfoFI4_MTg0V8Q&usqp=CAU" />
+        <Avatar image="https://firebasestorage.googleapis.com/v0/b/cardano-d265c.appspot.com/o/defaultProfile.png?alt=media&token=a2172f23-507f-4e25-a64d-beb767d9d0f3" />
       </div>
     </header>
   );
