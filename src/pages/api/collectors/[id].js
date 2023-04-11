@@ -39,7 +39,7 @@ export default async function handler(req, res) {
     try {
       await Promise.all(
         policyIds.map(async(id) => {
-          return await Collection.updateMany({patronId: id},{ $pull: {patronId: id}})
+          return await Collection.updateMany({policy: id},{ $pull: {patronId: user._id}})
         })
       )
       await Collector.findByIdAndDelete(id);

@@ -53,10 +53,6 @@ const UserSchema = mongoose.Schema({
     policyIds: {
         type: [String],
         default: []
-    },
-    collectionIds: {
-        type: [String],
-        default: []
     }
 }, {timestamp: true});
 

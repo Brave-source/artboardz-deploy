@@ -57,6 +57,7 @@ const CollectorsItems = ({
     const user = {...collector, display: !collector.display};
     dispatch(updateCollectorStart())
     try{
+      // http://localhost:3000/api/collectors
       const res = await axios.put(globalURL == "www" ? `${externalURL}/api/collectors/${id}`:`${baseURL}/api/collectors/${id}`, user);
       dispatch(updateCollectorSuccess({user, id}))
     }catch(err) {
