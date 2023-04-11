@@ -11,7 +11,7 @@ export default async function handler(req, res) {
   } = req;
   const token = cookies.token
 
-  dbConnect();
+  await dbConnect();
 
   if (method === "GET") {
     try {
@@ -36,11 +36,10 @@ export default async function handler(req, res) {
   if (method === "DELETE") {
     const user = await Collector.findById(id);
     const policyIds = user.policyIds;
-    console.log(policyIds)
     try {
       await Promise.all(
         policyIds.map(async(id) => {
-          return await Collection.updateMany({ $pull: {patronId: id}})
+          return await Collection.updateMany({patronId: id},{ $pull: {patronId: id}})
         })
       )
       await Collector.findByIdAndDelete(id);

@@ -46,7 +46,7 @@ export const collectorSlice = createSlice({
       state.isFetching = false;
       state.collectors[
         state.collectors.findIndex((item) => item._id === action.payload.id)
-      ] = action.payload.inputs;
+      ] = action.payload.user;
       state.collectors.sort((a, b) => a.createdAt - b.createdAt)
     },
     updateCollectorFailure: (state) => {

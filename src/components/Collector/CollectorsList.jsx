@@ -68,15 +68,15 @@ const CollectorsList = () => {
         return (
           <CollectorsItems
             key={index}
-            id={data._id}
-            image={data.image}
-            walletAddress={data.stakeAddress}
-            name={data.name}
-            nationality={data.nationality}
-            twitter={data.twitter}
-            uniqueCollection={data.policyIds}
-            collectionSize={data.assets}
-            display={data.display}
+            id={data?._id}
+            image={data?.image}
+            walletAddress={data?.stakeAddress}
+            name={data?.name}
+            nationality={data?.nationality}
+            twitter={data?.twitter}
+            uniqueCollection={data?.policyIds}
+            collectionSize={data?.assets}
+            display={data?.display}
           />
         );
       })}

@@ -23,7 +23,7 @@ const UserSchema = mongoose.Schema({
     },
     display: {
         type: Boolean,
-        default: true
+        default: false
     },
     assets: {
         type: [{
@@ -51,6 +51,10 @@ const UserSchema = mongoose.Schema({
         default: []
     },
     policyIds: {
+        type: [String],
+        default: []
+    },
+    collectionIds: {
         type: [String],
         default: []
     }
