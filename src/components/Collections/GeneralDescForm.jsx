@@ -54,7 +54,6 @@ const GeneralDescForm = () => {
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
          
-        // urlType === "artImg" ? setImgPerc(Math.round(progress)) : setPersonalImagePer(Math.round(progress));
         switch (snapshot.state) {
           case "paused":
             console.log("Upload is paused");
@@ -93,10 +92,7 @@ const GeneralDescForm = () => {
     if (physicalArtboard) {
       setphysicalArtboardUrl(URL.createObjectURL(physicalArtboard));
     }
-    console.log("BannerUrl: ", BannerUrl)
-    console.log("ArtistUrl", ArtistUrl)
-    console.log("digitalArtboardUrl: ", digitalArtboardUrl)
-    console.log("physicalArtboardUrl: ", physicalArtboardUrl)
+
   }, [Banner, Artist, digitalArtboard, physicalArtboard]);
 
   useEffect(() => {
@@ -278,7 +274,7 @@ const GeneralDescForm = () => {
       </div>
       <div className="flex flex-col">
         <label htmlFor="JPG" className="text-[#B3B5BD] text-base">
-          JPGstore link
+          Marketplace Link
         </label>
         <input
           type="text"

@@ -48,18 +48,6 @@ useEffect(() => {
 },[])
 return (
     <ul className="px-5">
-      {/* {DUMMY_DATA.map((data, index) => {
-        return (
-          <CollectionItem
-            key={index}
-            Policy={data.Policy}
-            artistName={data.artistName}
-            artboardTitle={data.artboardTitle}
-            location={data.location}
-            supplyTime={data.supplyTime}
-          />
-        );
-      })} */}
       {collections.map((data, index) => {
         return (
           <CollectionItem
@@ -79,12 +67,4 @@ return (
   );
 };
 
-// export const getCollections = async() => {
-//   const collectionRes = await axios.get('http://localhost:3000/api/collections')
-//   return {
-//     props: {
-//       collections: collectionRes.data
-//     }
-//   }
-// }
 export default CollectionList;

@@ -342,7 +342,7 @@ const GeneralDescForm = ({ id, setIsOpen, collection }) => {
     </div>
     <div className="flex flex-col">
       <label htmlFor="JPG" className="text-[#B3B5BD] text-base">
-        JPGstore link
+        Marketplace Link
       </label>
       <input
         type="text"

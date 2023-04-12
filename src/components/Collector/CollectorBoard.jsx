@@ -7,7 +7,7 @@ import CollectorsList from "./CollectorsList";
 const CollectorBoard = () => {
   return (
     <Card>
-      <CardHeader type="Collector" />
+      <CardHeader type="Collectors" />
       <CollectorListHeader />
       <CollectorsList />
     </Card>
