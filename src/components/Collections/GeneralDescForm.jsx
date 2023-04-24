@@ -326,46 +326,61 @@ const GeneralDescForm = () => {
           className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline h-[150px] rounded-md  text-base px-3"
         />
       </div>
-      
-        <div className="flex flex-col">
-          <label htmlFor="Twitter" className="text-[#B3B5BD] text-base">
-            Twitter
-          </label>
-          <input
-            type="url"
-            name="twitter"
-            id="Twitter"
-            onChange={handleChange}
-            className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
-          />
-          {errors.twitter && <p className="text-red-400">{errors.twitter}</p>}
-        </div>
-        <div className="flex flex-col">
-          <label htmlFor="Discord" className="text-[#B3B5BD] text-base">
-            Discord
-          </label>
-          <input
-            type="url"
-            name="discord"
-            id="Discord"
-            onChange={handleChange}
-            className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
-          />
-          {errors.discord && <p className="text-red-400">{errors.discord}</p>}
-        </div>
-        <div className="flex flex-col">
-          <label htmlFor="Instagram" className="text-[#B3B5BD] text-base">
-            Instagram
-          </label>
-          <input
-            type="url"
-            name="instagram"
-            id="Instagram"
-            onChange={handleChange}
-            className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
-          />
-          {errors.instagram && <p className="text-red-400">{errors.instagram}</p>}
-        </div>
+
+      <div className="grid grid-cols-4 gap-3 col-span-full">
+<div className="flex flex-col">
+  <label htmlFor="Twitter" className="text-[#B3B5BD] text-base">
+    Twitter
+  </label>
+  <input
+    type="url"
+    name="twitter"
+    id="Twitter"
+    onChange={handleChange}
+    className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
+  />
+  {errors.twitter && <p className="text-red-400">{errors.twitter}</p>}
+</div>
+<div className="flex flex-col">
+  <label htmlFor="Discord" className="text-[#B3B5BD] text-base">
+    Discord
+  </label>
+  <input
+    type="url"
+    name="discord"
+    id="Discord"
+    onChange={handleChange}
+    className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
+  />
+  {errors.discord && <p className="text-red-400">{errors.discord}</p>}
+</div>
+<div className="flex flex-col">
+  <label htmlFor="Instagram" className="text-[#B3B5BD] text-base">
+    Instagram
+  </label>
+  <input
+    type="url"
+    name="instagram"
+    id="Instagram"
+    onChange={handleChange}
+    className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
+  />
+  {errors.instagram && <p className="text-red-400">{errors.instagram}</p>}
+</div>
+<div className="flex flex-col">
+  <label htmlFor="Website" className="text-[#B3B5BD] text-base">
+    Website
+  </label>
+  <input
+    type="url"
+    name="Website"
+    id="Website"
+    onChange={handleChange}
+    className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
+  />
+  {errors.Website && <p className="text-red-400">{errors.Website}</p>}
+</div>
+</div>
       <div className="grid grid-cols-2 gap-3 col-span-full">
       <div className="flex flex-col ">
         <span className="text-[#B3B5BD] text-base ">
