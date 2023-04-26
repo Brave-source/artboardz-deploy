@@ -25,8 +25,6 @@ const GeneralDescForm = () => {
   const [digitalArtboard, setdigitalArtboard] = useState(null);
   const [physicalArtboard, setphysicalArtboard] = useState(null);
   const dispatch = useDispatch();
-  const externalURL = "https://www.admin.artboardz.net"
-  const globalURL = window.location.hostname.substring(0,3).toLocaleLowerCase()
 
   // image preview
   const [BannerUrl, setBannerUrl] = useState(null);
@@ -54,6 +52,7 @@ const GeneralDescForm = () => {
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
          
+        // urlType === "artImg" ? setImgPerc(Math.round(progress)) : setPersonalImagePer(Math.round(progress));
         switch (snapshot.state) {
           case "paused":
             console.log("Upload is paused");
@@ -92,7 +91,10 @@ const GeneralDescForm = () => {
     if (physicalArtboard) {
       setphysicalArtboardUrl(URL.createObjectURL(physicalArtboard));
     }
-
+    console.log("BannerUrl: ", BannerUrl)
+    console.log("ArtistUrl", ArtistUrl)
+    console.log("digitalArtboardUrl: ", digitalArtboardUrl)
+    console.log("physicalArtboardUrl: ", physicalArtboardUrl)
   }, [Banner, Artist, digitalArtboard, physicalArtboard]);
 
   useEffect(() => {
@@ -122,7 +124,7 @@ const GeneralDescForm = () => {
     // setErrors(validation(inputs))
     dispatch(addCollectionStart())
     try {
-      const res = await axios.post(globalURL == "www" ? `${externalURL}/api/collections` :`${baseURL}/api/collections`, inputs)
+      const res = await axios.post(`${baseURL}/api/collections`, inputs)
       dispatch(UIActions.hideAddCollectionForm())
       dispatch(addCollectionSuccess(res.data));
       toast.success("Successfully added")
@@ -274,7 +276,7 @@ const GeneralDescForm = () => {
       </div>
       <div className="flex flex-col">
         <label htmlFor="JPG" className="text-[#B3B5BD] text-base">
-          Marketplace Link
+          JPGstore link
         </label>
         <input
           type="text"
