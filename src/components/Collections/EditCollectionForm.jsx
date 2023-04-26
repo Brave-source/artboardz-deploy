@@ -18,7 +18,6 @@ import { useDispatch, useSelector } from "react-redux";
 import CancelIcon from "../../Assets/Icons/CancelIcon";
 import { UIActions } from "../../store/redux-store/UI-slice";
 
-
 const EditCollectionForm = ({ id, setIsOpen }) => {
   const collection = useSelector((collection) => collection.collection.collections.filter((item) => item._id === id)[0]);
   const dispatch = useDispatch();

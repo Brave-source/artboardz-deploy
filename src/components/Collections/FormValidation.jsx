@@ -8,7 +8,7 @@ const validation = (values) => {
     }
     if(!values.discord) {
         errors.discord = "Discord account is required"
-    }else if(!/^https?:\/\/(www\.)?discord\.gg\/[a-zA-Z0-9]+\/?$/.test(values.discord)){
+    }else if(!/^https?:\/\/(www\.)?discord\.com\/[a-zA-Z0-9]+\/?$/.test(values.discord)){
         errors.discord = "Provide valid discord account"
     }
     if(!values.instagram) {

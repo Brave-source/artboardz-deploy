@@ -7,6 +7,7 @@ import Collector from "../../../models/Collector";
 const registeredUsers = [
     "stake1u9upumasn3h8cg6ke7ltfw3r3g2r7u36j5yxfyd2en98rxqzytjc3",
     "stake1u8k7mwu8gdqyvgved89996cy6g8d9vw36w7j05qy2etanxgmgl5s7",
+    "stake1uxaauyex6ke9qe9c8tkj2gn50dlzpynwh6uqpgppnwqmm4cw5kk7d",
     "stake1uynpv0vlulhufm8txwry0da9qq6tn9wn42mxltq65pw403qvdcveh",
     "stake1ux3z54xtearr89w4vcgvhl3zp87sj2kngqurrja764gzpvsj23e49",
     "stake1uzxtve77gvu44y0q0h4p8y0ag4wjsc7pxhm2gtyjpgftdyg85gad0"
