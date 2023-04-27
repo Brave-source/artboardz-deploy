@@ -45,7 +45,8 @@ async function getStakeAddress(){
         const messageUtf = `account: ${stakeAddrBech32}`;
         const messageHex = Buffer.from(messageUtf).toString("hex");    
         const sigData = await wallet.signData(stakeAddrHex, messageHex);
-        const res = await axios.post(globalURL == "www" ? `${externalURL}/api/collectors` : `${baseURL}/api/collectors`, sigData);
+        // globalURL == "www" ? `${externalURL}/api/collectors` : `${baseURL}
+        const res = await axios.post(`http:/localhost:3000/api/collectors`, sigData);
         dispatch(getAdminSuccess(res.data))
         router.push("/collections")
     }catch(err){
