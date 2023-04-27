@@ -38,7 +38,7 @@ useEffect(() => {
   const getCollections = async() => {
     dispatch(getCollectionStart())
     try {
-      const res = await axios.get(globalURL == "www" ? `${externalURL}/api/collections` :`${baseURL}/api/collections`)
+      const res = await axios.get(`http://localhost:3000/api/collections`)
       dispatch(getCollectionSuccess((res.data)));
     }catch(err){
       dispatch(getCollectionFailure())
