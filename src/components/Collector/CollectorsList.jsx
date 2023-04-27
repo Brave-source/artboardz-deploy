@@ -54,7 +54,7 @@ const CollectorsList = () => {
     const getCollectors = async() => {
       dispatch(getCollectorStart());
       try {
-        const res = await axios.get(globalURL == "www" ? `${externalURL}/api/collectors` : `${baseURL}/api/collectors`);
+        const res = await axios.get(globalURL == "www" ? `${externalURL}/api/collections` :`${baseURL}/api/collectors`);
         dispatch(getCollectorSuccess(res.data));
       }catch(err) {
         dispatch(getCollectorFailure())
@@ -78,8 +78,8 @@ const CollectorsList = () => {
 
   return (
     <div className="px-5">
-      <ul>
-        {currentItems.map((data, index) => {
+      <ul> 
+        {currentItems.length > 0 && currentItems.map((data, index) => {
           return (
             <CollectorsItems
               key={index}
@@ -96,7 +96,7 @@ const CollectorsList = () => {
           );
         })}
       </ul>
-      <div className="flex justify-center mt-5">
+      <div className="flex justify-center pb-10">
         {pageNumbers.map((number) => {
           return (
             <button

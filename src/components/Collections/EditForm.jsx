@@ -14,8 +14,6 @@ import validation from "./FormValidation";
 import CameraIcon from "../../Assets/Icons/CameraIcon";
 import { baseURL } from "../../utils/url";
 import { AddCollectionFormIsShown, UIActions } from "../../store/redux-store/UI-slice";
-import { baseURL } from "../../utils/url";
-import { AddCollectionFormIsShown, UIActions } from "../../store/redux-store/UI-slice";
 import { updateCollectionFailure, updateCollectionStart, updateCollectionSuccess } from "../../store/redux-store/CollectionSlice";
 
 const GeneralDescForm = ({ id, setIsOpen, collection }) => {
