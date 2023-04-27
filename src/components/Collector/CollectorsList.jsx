@@ -43,16 +43,17 @@ const DUMMY_DATA = [
 ];
 
 const CollectorsList = () => {
-  const dispatch = useDispatch()
-  const collectors = useSelector((collector) => collector.collector.collectors)
-  const externalURL = "https://www.admin.artboardz.net"
-  const globalURL = window.location.hostname.substring(0,3).toLocaleLowerCase()
-  
+  const dispatch = useDispatch();
+  const collectors = useSelector((collector) => collector.collector.collectors);
+  const externalURL = "https://www.admin.artboardz.net";
+  const globalURL = window.location.hostname.substring(0,3).toLocaleLowerCase();
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 15;
+
   useEffect(() => {
     const getCollectors = async() => {
       dispatch(getCollectorStart());
       try {
-        // globalURL == "www" ? `${externalURL}/api/collectors` : `${baseURL}/api/collectors`
         const res = await axios.get(globalURL == "www" ? `${externalURL}/api/collectors` : `${baseURL}/api/collectors`);
         dispatch(getCollectorSuccess(res.data));
       }catch(err) {
@@ -60,27 +61,55 @@ const CollectorsList = () => {
       }
     }
     getCollectors();
-  },[])
+  },[]);
+
+  const handlePageClick = (page) => {
+    setCurrentPage(page);
+  }
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = collectors.slice(indexOfFirstItem, indexOfLastItem);
+
+  const pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(collectors.length / itemsPerPage); i++) {
+    pageNumbers.push(i);
+  }
 
   return (
-    <ul className="px-5">
-      {collectors.map((data, index) => {
-        return (
-          <CollectorsItems
-            key={index}
-            id={data?._id}
-            image={data?.image}
-            walletAddress={data?.stakeAddress}
-            name={data?.name}
-            nationality={data?.nationality}
-            twitter={data?.twitter}
-            uniqueCollection={data?.policyIds}
-            collectionSize={data?.assets}
-            display={data?.display}
-          />
-        );
-      })}
-    </ul>
+    <div className="px-5">
+      <ul>
+        {currentItems.map((data, index) => {
+          return (
+            <CollectorsItems
+              key={index}
+              id={data?._id}
+              image={data?.image}
+              walletAddress={data?.stakeAddress}
+              name={data?.name}
+              nationality={data?.nationality}
+              twitter={data?.twitter}
+              uniqueCollection={data?.policyIds}
+              collectionSize={data?.assets}
+              display={data?.display}
+            />
+          );
+        })}
+      </ul>
+      <div className="flex justify-center mt-5">
+        {pageNumbers.map((number) => {
+          return (
+            <button
+              key={number}
+              onClick={() => handlePageClick(number)}
+              className={`px-3 py-1 rounded-lg mx-1 ${currentPage === number ? "bg-gray-800 text-white" : "bg-white text-gray-800 border border-gray-300 hover:bg-gray-100"}`}
+            >
+              {number}
+            </button>
+          );
+        })}
+      </div>
+    </div>
   );
 };
 

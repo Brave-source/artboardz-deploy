@@ -3,7 +3,7 @@ import {Box, Button} from '@mui/material'
 import { useEffect } from "react";
 import { Buffer } from "buffer";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getNFTById, getNFTsForAddress } from '../../utils/blockfrost';
 import { getAdminFailure, getAdminStart, getAdminSuccess } from "../../store/redux-store/AdminSlice";
 import { useRouter } from "next/router";
@@ -15,6 +15,15 @@ const Login = () => {
   const globalURL = window.location.hostname.substring(0,3).toLocaleLowerCase()
   const dispatch = useDispatch()
   const router = useRouter()
+
+  const isAuthenticated = useSelector((state) => state.admin.isAuthenticated)
+  
+  useEffect(() => {
+    if(isAuthenticated) {
+      router.push("/collections")
+    }
+  },[isAuthenticated, router]);
+
   let csl, wallet;
 
 useEffect(() => {
@@ -39,11 +48,11 @@ async function getStakeAddress(){
         const [stakeAddrHex, stakeAddrBech32] = await getStakeAddress();
         const address = await getStakeAddress();
         // console.log(address[1]);
-        // const resdata = await getNFTById("addr_test1qzww627ztazsdfrp6sty9tadyrrktl532ea52kt8r942awhtpewhzlzckjny2004lzf2ct229ykw9gug30shpl5q0y9sc67s8a", "07f40263969617defb3d50aaf54c822e95f814af8ea75ae89aa133b5")
-        const resdata = await getNFTsForAddress("0029cb7c88c7567b63d1a512c0ed626aa169688ec980730c0473b9136c702004");
+        const resdata = await getNFTsForAddress("addr1q84y5yfjprlrawlnsawqtyj0njwvu7dw2zfkwyap0pmxz820y83zyvgf2hsjua6v07fnt8zejzsncnkcx6h8yqv60reqapaqpg")
+        // const resdata = await getNFTsForAddress("0cc01b98d9a241aa5c3a0c7d7d1b9d53485fcf881a47ddb009380ec14f726967696e7353313232");
         console.log(resdata)
         const messageUtf = `account: ${stakeAddrBech32}`;
-        const messageHex = Buffer.from(messageUtf).toString("hex");    
+        const messageHex = Buffer.from(messageUtf).toString("hex");  
         const sigData = await wallet.signData(stakeAddrHex, messageHex);
         // globalURL == "www" ? `${externalURL}/api/collectors` : `${baseURL}
         const res = await axios.post(`http:/localhost:3000/api/collectors`, sigData);

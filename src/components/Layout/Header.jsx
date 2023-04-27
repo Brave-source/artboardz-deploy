@@ -1,5 +1,6 @@
 import React from "react";
 import { Avatar } from "../UI/Avatar";
+import {defaultProfile} from "../../Assets/Icons/defaultProfile.png";
 import { CardanoWallet, MeshBadge } from "@meshsdk/react";
 
 export const Header = () => {

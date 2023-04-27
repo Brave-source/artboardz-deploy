@@ -25,8 +25,6 @@ const GeneralDescForm = () => {
   const [digitalArtboard, setdigitalArtboard] = useState(null);
   const [physicalArtboard, setphysicalArtboard] = useState(null);
   const dispatch = useDispatch();
-  const externalURL = "https://www.admin.artboardz.net"
-  const globalURL = window.location.hostname.substring(0,3).toLocaleLowerCase()
 
   // image preview
   const [BannerUrl, setBannerUrl] = useState(null);
@@ -54,6 +52,7 @@ const GeneralDescForm = () => {
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
          
+        // urlType === "artImg" ? setImgPerc(Math.round(progress)) : setPersonalImagePer(Math.round(progress));
         switch (snapshot.state) {
           case "paused":
             console.log("Upload is paused");
@@ -92,7 +91,10 @@ const GeneralDescForm = () => {
     if (physicalArtboard) {
       setphysicalArtboardUrl(URL.createObjectURL(physicalArtboard));
     }
-
+    console.log("BannerUrl: ", BannerUrl)
+    console.log("ArtistUrl", ArtistUrl)
+    console.log("digitalArtboardUrl: ", digitalArtboardUrl)
+    console.log("physicalArtboardUrl: ", physicalArtboardUrl)
   }, [Banner, Artist, digitalArtboard, physicalArtboard]);
 
   useEffect(() => {
@@ -122,7 +124,7 @@ const GeneralDescForm = () => {
     // setErrors(validation(inputs))
     dispatch(addCollectionStart())
     try {
-      const res = await axios.post(globalURL == "www" ? `${externalURL}/api/collections` :`${baseURL}/api/collections`, inputs)
+      const res = await axios.post(`${baseURL}/api/collections`, inputs)
       dispatch(UIActions.hideAddCollectionForm())
       dispatch(addCollectionSuccess(res.data));
       toast.success("Successfully added")
@@ -274,7 +276,7 @@ const GeneralDescForm = () => {
       </div>
       <div className="flex flex-col">
         <label htmlFor="JPG" className="text-[#B3B5BD] text-base">
-          Marketplace Link
+          JPGstore link
         </label>
         <input
           type="text"
@@ -324,46 +326,61 @@ const GeneralDescForm = () => {
           className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline h-[150px] rounded-md  text-base px-3"
         />
       </div>
-      
-        <div className="flex flex-col">
-          <label htmlFor="Twitter" className="text-[#B3B5BD] text-base">
-            Twitter
-          </label>
-          <input
-            type="url"
-            name="twitter"
-            id="Twitter"
-            onChange={handleChange}
-            className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
-          />
-          {errors.twitter && <p className="text-red-400">{errors.twitter}</p>}
-        </div>
-        <div className="flex flex-col">
-          <label htmlFor="Discord" className="text-[#B3B5BD] text-base">
-            Discord
-          </label>
-          <input
-            type="url"
-            name="discord"
-            id="Discord"
-            onChange={handleChange}
-            className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
-          />
-          {errors.discord && <p className="text-red-400">{errors.discord}</p>}
-        </div>
-        <div className="flex flex-col">
-          <label htmlFor="Instagram" className="text-[#B3B5BD] text-base">
-            Instagram
-          </label>
-          <input
-            type="url"
-            name="instagram"
-            id="Instagram"
-            onChange={handleChange}
-            className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
-          />
-          {errors.instagram && <p className="text-red-400">{errors.instagram}</p>}
-        </div>
+
+      <div className="grid grid-cols-4 gap-3 col-span-full">
+<div className="flex flex-col">
+  <label htmlFor="Twitter" className="text-[#B3B5BD] text-base">
+    Twitter
+  </label>
+  <input
+    type="url"
+    name="twitter"
+    id="Twitter"
+    onChange={handleChange}
+    className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
+  />
+  {errors.twitter && <p className="text-red-400">{errors.twitter}</p>}
+</div>
+<div className="flex flex-col">
+  <label htmlFor="Discord" className="text-[#B3B5BD] text-base">
+    Discord
+  </label>
+  <input
+    type="url"
+    name="discord"
+    id="Discord"
+    onChange={handleChange}
+    className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
+  />
+  {errors.discord && <p className="text-red-400">{errors.discord}</p>}
+</div>
+<div className="flex flex-col">
+  <label htmlFor="Instagram" className="text-[#B3B5BD] text-base">
+    Instagram
+  </label>
+  <input
+    type="url"
+    name="instagram"
+    id="Instagram"
+    onChange={handleChange}
+    className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
+  />
+  {errors.instagram && <p className="text-red-400">{errors.instagram}</p>}
+</div>
+<div className="flex flex-col">
+  <label htmlFor="Website" className="text-[#B3B5BD] text-base">
+    Website
+  </label>
+  <input
+    type="url"
+    name="Website"
+    id="Website"
+    onChange={handleChange}
+    className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
+  />
+  {errors.Website && <p className="text-red-400">{errors.Website}</p>}
+</div>
+</div>
       <div className="grid grid-cols-2 gap-3 col-span-full">
       <div className="flex flex-col ">
         <span className="text-[#B3B5BD] text-base ">
