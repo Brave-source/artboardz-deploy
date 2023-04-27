@@ -48,7 +48,7 @@ const CollectorsList = () => {
   const externalURL = "https://www.admin.artboardz.net";
   const globalURL = window.location.hostname.substring(0,3).toLocaleLowerCase();
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 15;
+  const itemsPerPage = 8;
 
   useEffect(() => {
     const getCollectors = async() => {
