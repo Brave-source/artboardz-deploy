@@ -78,7 +78,7 @@ const CollectorsList = () => {
 
   return (
     <div className="px-5">
-      <ul>
+      <ul> 
         {currentItems.length > 0 && currentItems.map((data, index) => {
           return (
             <CollectorsItems
@@ -96,7 +96,7 @@ const CollectorsList = () => {
           );
         })}
       </ul>
-      <div className="flex justify-center mt-5">
+      <div className="flex justify-center pb-10">
         {pageNumbers.map((number) => {
           return (
             <button
