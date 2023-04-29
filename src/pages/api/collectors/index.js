@@ -11,6 +11,7 @@ const registeredUsers = [
     "stake1uynpv0vlulhufm8txwry0da9qq6tn9wn42mxltq65pw403qvdcveh",
     "stake1ux3z54xtearr89w4vcgvhl3zp87sj2kngqurrja764gzpvsj23e49",
     "stake1uzxtve77gvu44y0q0h4p8y0ag4wjsc7pxhm2gtyjpgftdyg85gad0",
+    "stake1u9ax8rjlq7wc5s9w5r3jzjlps277urh5fx9h200zglwgz0sve6npv",
     "stake_test1urc8l0tn9vl3dz5ch9lvq05n0a3dd29j6k3l0j9gs8mwrfqf0xx7m"
 ]
 
