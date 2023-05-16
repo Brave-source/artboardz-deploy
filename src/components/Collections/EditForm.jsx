@@ -444,19 +444,20 @@ const GeneralDescForm = ({ id, setIsOpen, collection }) => {
         {errors.instagram && <p className="text-red-400">{errors.instagram}</p>}
       </div>
       <div className="flex flex-col">
-        <label htmlFor="webLink" className="text-[#B3B5BD] text-base">
+        <label htmlFor="weblink" className="text-[#B3B5BD] text-base">
           Website
         </label>
         <input
           type="url"
           name="webLink"
-          id="webLink"
+          id="weblink"
           onChange={(e)=> setWebLink(e.target.value)}
           value={webLink}
           className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
         />
         {errors.webLink && <p className="text-red-400">{errors.webLink}</p>}
       </div>
+    </div>
     <div className="grid grid-cols-2 gap-3 col-span-full">
     <div className="flex flex-col ">
       <span className="text-[#B3B5BD] text-base ">
