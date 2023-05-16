@@ -49,6 +49,7 @@ const GeneralDescForm = ({ id, setIsOpen, collection }) => {
   const [artDesc, setArtDesc] = useState(collection.artDesc)
   const [instagram, setInstagram] = useState(collection.instagram)
   const [discord, setDiscord] = useState(collection.discord)
+  const [website, setWebsite]= useState(collection.website)
   const [newRelease, setNewRelease] = useState(collection.newRelease)
   const [jpgLink, setJpgLink] = useState(collection.jpgLink)
   const [nmkrLink, setNmkrLink] = useState(collection.nmkrLink)
@@ -399,7 +400,7 @@ const GeneralDescForm = ({ id, setIsOpen, collection }) => {
         className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline h-[150px] rounded-md  text-base px-3"
       />
     </div>
-    
+    <div className="grid grid-cols-4 gap-3 col-span-full">
       <div className="flex flex-col">
         <label htmlFor="Twitter" className="text-[#B3B5BD] text-base">
           Twitter
