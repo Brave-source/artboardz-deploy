@@ -81,6 +81,10 @@ const CollectionSchema = new mongoose.Schema({
         type: String,
         required: false
     },
+    webLink: {
+        type: String,
+        required: false
+    },
     country: {
         type: String,
         required: true

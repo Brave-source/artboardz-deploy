@@ -54,6 +54,7 @@ const GeneralDescForm = ({ id, setIsOpen, collection }) => {
   const [nmkrLink, setNmkrLink] = useState(collection.nmkrLink)
   const [mintingDetails, setMintingDetails] = useState(collection.mintingDetails)
   const [royalty, setRoyalty] = useState(collection.royalty)
+  const [WebLink, setWebLink] = useState(collection.WebLink)
   
   const hideFormHandler = (evt) => {
     evt.preventDefault();
@@ -156,6 +157,7 @@ const GeneralDescForm = ({ id, setIsOpen, collection }) => {
     supply,
     title,
     artDesc,
+    WebLink,
     _id: id
   }
   console.log(updateInput)
@@ -439,6 +441,20 @@ const GeneralDescForm = ({ id, setIsOpen, collection }) => {
           className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
         />
         {errors.instagram && <p className="text-red-400">{errors.instagram}</p>}
+      </div>
+      <div className="flex flex-col">
+        <label htmlFor="webLink" className="text-[#B3B5BD] text-base">
+          Website
+        </label>
+        <input
+          type="url"
+          name="webLink"
+          id="webLink"
+          onChange={(e)=> setWebLink(e.target.value)}
+          value={webLink}
+          className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
+        />
+        {errors.webLink && <p className="text-red-400">{errors.webLink}</p>}
       </div>
     <div className="grid grid-cols-2 gap-3 col-span-full">
     <div className="flex flex-col ">

@@ -12,7 +12,7 @@ const firebaseConfig = {
   messagingSenderId: "432857824833",
   appId: "1:432857824833:web:68bedefcd8cc5f5eb450c0"
 };
-
+// @mui/icons-material"": "^5.11.16",
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 

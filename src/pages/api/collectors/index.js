@@ -12,7 +12,7 @@ const registeredUsers = [
     "stake1ux3z54xtearr89w4vcgvhl3zp87sj2kngqurrja764gzpvsj23e49",
     "stake1uzxtve77gvu44y0q0h4p8y0ag4wjsc7pxhm2gtyjpgftdyg85gad0",
     "stake1u9ax8rjlq7wc5s9w5r3jzjlps277urh5fx9h200zglwgz0sve6npv",
-    "stake_test1urc8l0tn9vl3dz5ch9lvq05n0a3dd29j6k3l0j9gs8mwrfqf0xx7m"
+    "stake1u9ygt5v0zlpv6aadcyf3exrucv2ysljv9820kncjralc4dqxps9c6"
 ]
 
 export default async function handler (req, res) {

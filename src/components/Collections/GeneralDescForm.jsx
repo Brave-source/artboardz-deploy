@@ -91,10 +91,6 @@ const GeneralDescForm = () => {
     if (physicalArtboard) {
       setphysicalArtboardUrl(URL.createObjectURL(physicalArtboard));
     }
-    console.log("BannerUrl: ", BannerUrl)
-    console.log("ArtistUrl", ArtistUrl)
-    console.log("digitalArtboardUrl: ", digitalArtboardUrl)
-    console.log("physicalArtboardUrl: ", physicalArtboardUrl)
   }, [Banner, Artist, digitalArtboard, physicalArtboard]);
 
   useEffect(() => {
@@ -373,7 +369,7 @@ const GeneralDescForm = () => {
   </label>
   <input
     type="url"
-    name="Website"
+    name="WebLink"
     id="Website"
     onChange={handleChange}
     className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
