@@ -40,12 +40,12 @@ async function getStakeAddress(){
         const address = await getStakeAddress();
         // console.log(address[1]);
         // const resdata = await getNFTById("addr_test1qzww627ztazsdfrp6sty9tadyrrktl532ea52kt8r942awhtpewhzlzckjny2004lzf2ct229ykw9gug30shpl5q0y9sc67s8a", "07f40263969617defb3d50aaf54c822e95f814af8ea75ae89aa133b5")
-        const resdata = await getNFTsForAddress("0029cb7c88c7567b63d1a512c0ed626aa169688ec980730c0473b9136c702004");
-        console.log(resdata)
+        // const resdata = await getNFTsForAddress("0029cb7c88c7567b63d1a512c0ed626aa169688ec980730c0473b9136c702004");
         const messageUtf = `account: ${stakeAddrBech32}`;
         const messageHex = Buffer.from(messageUtf).toString("hex");    
         const sigData = await wallet.signData(stakeAddrHex, messageHex);
-        const res = await axios.post(globalURL == "www" ? `${externalURL}/api/collections` :`${baseURL}/api/collectors`, sigData);
+        // const res = await axios.post('http://localhost:3000/api/collectors', sigData)
+        const res = await axios.post(globalURL == "www" ? `${externalURL}/api/collectors` :`${baseURL}/api/collectors`, sigData);
         dispatch(getAdminSuccess(res.data))
         router.push("/collections")
     }catch(err){
