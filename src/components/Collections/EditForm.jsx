@@ -55,7 +55,7 @@ const GeneralDescForm = ({ id, setIsOpen, collection }) => {
   const [nmkrLink, setNmkrLink] = useState(collection.nmkrLink)
   const [mintingDetails, setMintingDetails] = useState(collection.mintingDetails)
   const [royalty, setRoyalty] = useState(collection.royalty)
-  const [WebLink, setWebLink] = useState(collection.WebLink)
+  const [webLink, setWebLink] = useState(collection.webLink)
   
   const hideFormHandler = (evt) => {
     evt.preventDefault();
@@ -158,16 +158,16 @@ const GeneralDescForm = ({ id, setIsOpen, collection }) => {
     supply,
     title,
     artDesc,
-    WebLink,
+    webLink,
     _id: id
   }
-  console.log(updateInput)
   const formSubmitHandler = async (evt) => {
     evt.preventDefault();
     // setErrors(validation(updateInput));
     dispatch(updateCollectionStart());
     
     try {
+      // const res = await axios.put(`http://localhost:3000/api/collections/${id}`, updateInput)
       const res = await axios.put(globalURL == "www" ? `${externalURL}/api/collections/${id}` :`${baseURL}/api/collections/${id}`,updateInput);
       dispatch(updateCollectionSuccess({id, updateInput}));
       setIsOpen((prev) => !prev)
