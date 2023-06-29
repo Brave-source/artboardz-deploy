@@ -75,7 +75,7 @@ const GeneralDescForm = () => {
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
          
-        // urlType === "artImg" ? setImgPerc(Math.round(progress)) : setPersonalImagePer(Math.round(progress));
+        // urlType === "artImg" ? setImgPerc(Math.round(progress)) : setPersonalImagePer(Math.round(progress)); est
         switch (snapshot.state) {
           case "paused":
             console.log("Upload is paused");
