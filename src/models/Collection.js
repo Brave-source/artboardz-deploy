@@ -101,11 +101,11 @@ const CollectionSchema = new mongoose.Schema({
         type: [{
             position: {
                   lat: {
-                    type: String,
+                    type: Number,
                     required: true
                   },
                   lng: {
-                    type: String,
+                    type: Number,
                     required: true
                   }
             },
