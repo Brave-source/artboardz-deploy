@@ -13,7 +13,7 @@ import axios from 'axios';
 import validation from "./FormValidation";
 import CameraIcon from "../../Assets/Icons/CameraIcon";
 import { baseURL } from "../../utils/url";
-import { AddCollectionFormIsShown, UIActions } from "../../store/redux-store/UI-slice";
+import { AddCollectionFormIsShown, UIActions, } from "../../store/redux-store/UI-slice";
 import { updateCollectionFailure, updateCollectionStart, updateCollectionSuccess } from "../../store/redux-store/CollectionSlice";
 
 const GeneralDescForm = ({ id, setIsOpen, collection }) => {
@@ -61,11 +61,7 @@ const GeneralDescForm = ({ id, setIsOpen, collection }) => {
     evt.preventDefault();
     setIsOpen((prev) => !prev)
   };
-  const handleChange = (e) => {
-    setInputs((prev) => {
-      return { ...prev, [e.target.name]: e.target.value };
-    });
-  };
+
   const uploadFile = (file, urlType) => {
     const storage = getStorage(app);
     const fileName = new Date().getTime() + file.name;
@@ -159,7 +155,7 @@ const GeneralDescForm = ({ id, setIsOpen, collection }) => {
     title,
     artDesc,
     webLink,
-    _id: id
+    _id: id,
   }
   const formSubmitHandler = async (evt) => {
     evt.preventDefault();
@@ -180,7 +176,8 @@ const GeneralDescForm = ({ id, setIsOpen, collection }) => {
   };
 
   return (
-    <form className="grid grid-cols-3 gap-4" onSubmit={formSubmitHandler}>
+    <>
+      <form className="grid grid-cols-3 gap-4" onSubmit={formSubmitHandler}>
     <div className="flex flex-col">
       <label htmlFor="policy" className="text-[#B3B5BD] text-base">
         Policy
@@ -573,8 +570,7 @@ const GeneralDescForm = ({ id, setIsOpen, collection }) => {
       >
         {physicalArtboard && physicalArtboardUrl ?
         <div style={{width: '100%', height: '100%', position: 'relative'}}>
-          <Image src={physicalArtboardUrl} fill
-  objectFit='contain'/>
+          <Image src={physicalArtboardUrl} fill objectFit='contain'/>
           </div>
           :
           <div style={{width: '100%', height: '100%', position: 'relative'}}>
@@ -599,7 +595,6 @@ const GeneralDescForm = ({ id, setIsOpen, collection }) => {
     </div>
     <div className="grid grid-cols-2 gap-3 col-span-full">
     <footer className=" flex justify-center gap-6  col-span-2">
-    
       <button
         onClick={hideFormHandler}
         className="px-[20px] py-[10px] border border-white rounded-md text-sm"
@@ -617,6 +612,7 @@ const GeneralDescForm = ({ id, setIsOpen, collection }) => {
     </footer>
     </div>
   </form>
+    </>
   );
 };
 

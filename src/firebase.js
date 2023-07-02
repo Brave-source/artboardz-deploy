@@ -5,7 +5,7 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCo3h6fHTPscrfpZ4Rh9DxdwyFtsU-4sqc",
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: "cardano-d265c.firebaseapp.com",
   projectId: "cardano-d265c",
   storageBucket: "cardano-d265c.appspot.com",

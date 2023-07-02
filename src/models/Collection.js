@@ -96,6 +96,33 @@ const CollectionSchema = new mongoose.Schema({
     patronId: {
         type: [String],
         default: []
+    },
+    vendors: {
+        type: [{
+            position: {
+                  lat: {
+                    type: String,
+                    required: true
+                  },
+                  lng: {
+                    type: String,
+                    required: true
+                  }
+            },
+            title: {
+                type: String,
+                required: false
+            },
+            desc: {
+                type: String,
+                required: false
+            },
+            img: {
+                type: String,
+                default: ""
+            }
+        }],
+        default: []
     }
 }, {timestamps: true})
 

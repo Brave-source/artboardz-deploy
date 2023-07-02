@@ -4,6 +4,7 @@ export const collectionSlice = createSlice({
   name: "collection",
   initialState: {
     collections: [],
+    vendor: {},
     isFetching: false,
     error: false,
   },
@@ -67,6 +68,9 @@ export const collectionSlice = createSlice({
       state.isFetching = false;
       state.error = true;
     },
+    addVendor: (state, action) => {
+      state.vendor = action.payload;
+    },
   },
 });
 
@@ -83,6 +87,7 @@ export const {
   addCollectionStart,
   addCollectionSuccess,
   addCollectionFailure,
+  addVendor,
 } = collectionSlice.actions;
 
 export default collectionSlice.reducer;

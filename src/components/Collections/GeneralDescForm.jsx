@@ -16,25 +16,36 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { addCollectionFailure, addCollectionStart, addCollectionSuccess } from "../../store/redux-store/CollectionSlice";
 import Image from "next/image";
 import { baseURL } from "../../utils/url";
-import FormComponent from "./FormComponent";
 
 const GeneralDescForm = () => {
   const [entries, setEntries] = useState([]);
-  const log =() =>{
-    console.log(entries)
+
+  const log =(e) =>{
+    e.stopPropagation()
   }
   const handleInputChange = (index, field, value) => {
     const newEntries = [...entries];
-    newEntries[index][field] = value;
+    if(field == 'lat' || field == 'lng') {
+      newEntries[index].position = {
+        ...newEntries[index].position,
+        [field]: value,
+      };
+    } else {
+      newEntries[index][field] = value;
+    }
     setEntries(newEntries);
   };
-
-  const handleAddEntry = () => {
+console.log(entries)
+  const handleAddEntry = (e) => {
+    e.stopPropagation()
     const newEntry = {
-      x: '',
-      y: '',
+      position: {
+        lat: "",
+        lng: "" 
+      },
       title: '',
-      description: '',
+      desc: '',
+      img: '',
     };
     setEntries([...entries, newEntry]);
   };
@@ -92,9 +103,15 @@ const GeneralDescForm = () => {
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          setInputs((prev) => {
-            return { ...prev, [urlType]: downloadURL };
-          });
+          if(urlType == "img") {
+           const newEntries = [...entries];
+           newEntries[entries.length-1][urlType] = downloadURL;
+           setEntries(newEntries)
+          } else {
+            setInputs((prev) => {
+              return { ...prev, [urlType]: downloadURL };
+            });
+          }
           toast.success("Successfully upload photo!")
         });
       }
@@ -135,7 +152,7 @@ const GeneralDescForm = () => {
     physicalArtboard && uploadFile(physicalArtboard, "physicalArtUrl");
   }, [physicalArtboard]);
   useEffect(() => {
-    vendorsImage && uploadFile(vendorsImage, "vendorsImage ");
+    vendorsImage && uploadFile(vendorsImage, "img");
   }, [vendorsImage]);
 
   const hideFormHandler = (evt) => {
@@ -144,12 +161,18 @@ const GeneralDescForm = () => {
     dispatch(UIActions.hideEditCollectionForm());
   };
 
+  const data = {
+    ...inputs,
+    vendors: entries,
+  }
+
   const formSubmitHandler = async(evt) => {
     evt.preventDefault();
+    console.log(data)
     // setErrors(validation(inputs))
     dispatch(addCollectionStart())
     try {
-      const res = await axios.post(`${baseURL}/api/collections`, inputs)
+      const res = await axios.post(`http://localhost:3000/api/collections`, data)
       dispatch(UIActions.hideAddCollectionForm())
       dispatch(addCollectionSuccess(res.data));
       toast.success("Successfully added")
@@ -500,8 +523,7 @@ const GeneralDescForm = () => {
         >
           {physicalArtboard && physicalArtboardUrl ?
           <div style={{width: '100%', height: '100%', position: 'relative'}}>
-            <Image src={physicalArtboardUrl} fill
-    objectFit='contain'/>
+            <Image src={physicalArtboardUrl} fill objectFit='contain'/>
             </div>
             :
             <CameraIcon />
@@ -519,32 +541,32 @@ const GeneralDescForm = () => {
       <div className="col-span-2">
       <div className="container mx-auto p-4">
       <div className="grid grid-cols-2 gap-4">
-        {entries.map((entry, index) => (
+        { entries && entries?.map((entry, index) => (
           <div key={index} className="border rounded p-4">
             <h3 className="text-xl mb-2">Entry {index + 1}</h3>
             <div className="mb-4">
               <input
                 type="text"
-                placeholder="x"
-                className="border border-gray-300 rounded px-2 py-1 w-full"
-                value={entry.x}
-                onChange={(e) => handleInputChange(index, 'x', e.target.value)}
+                placeholder="latitude"
+                className="focus:bg-transparent bg-[#272832] border border-gray-300 rounded px-2 py-1 w-full"
+                value={entry.position.lat}
+                onChange={(e) => handleInputChange(index, 'lat', e.target.value)}
               />
             </div>
             <div className="mb-4">
               <input
                 type="text"
-                placeholder="y"
-                className="border border-gray-300 rounded px-2 py-1 w-full"
-                value={entry.y}
-                onChange={(e) => handleInputChange(index, 'y', e.target.value)}
+                placeholder="longitude"
+                className="focus:bg-transparent bg-[#272832] border border-gray-300 rounded px-2 py-1 w-full"
+                value={entry.position.lng}
+                onChange={(e) => handleInputChange(index, 'lng', e.target.value)}
               />
             </div>
             <div className="mb-4">
               <input
                 type="text"
                 placeholder="Title"
-                className="border border-gray-300 rounded px-2 py-1 w-full"
+                className="focus:bg-transparent bg-[#272832] border border-gray-300 rounded px-2 py-1 w-full"
                 value={entry.title}
                 onChange={(e) => handleInputChange(index, 'title', e.target.value)}
               />
@@ -552,50 +574,57 @@ const GeneralDescForm = () => {
             <div>
               <textarea
                 placeholder="Description"
-                className="border border-gray-300 rounded px-2 py-1 w-full"
-                value={entry.description}
-                onChange={(e) => handleInputChange(index, 'description', e.target.value)}
+                className="focus:bg-transparent bg-[#272832] border border-gray-300 rounded px-2 py-1 w-full"
+                value={entry.desc}
+                onChange={(e) => handleInputChange(index, 'desc', e.target.value)}
               ></textarea>
             </div>
             <div className="flex flex-col  ">
-        <span className="text-[#B3B5BD] text-base">
-        Image
-        </span>
-        <label
-          htmlFor="vendorsImage"
-          className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-[150px] text-base px-3 flex items-center justify-center"
-        >
-          {vendorsImage && vendorsImageUrl ?
-          <div style={{width: '100%', height: '100%', position: 'relative'}}>
-            <Image src={vendorsImageUrl} fill
-    objectFit='contain'/>
+              <span className="text-[#B3B5BD] text-base">
+              Image
+              </span>
+              <label
+                htmlFor="vendorsImage"
+                className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-[150px] text-base px-3 flex items-center justify-center"
+              >
+                {vendorsImage && vendorsImageUrl ?
+                <div style={{width: '100%', height: '100%', position: 'relative'}}>
+                  <Image src={entry.img? entry.img : vendorsImageUrl} fill objectFit='contain'/>
+                  </div>
+                  :
+                  <CameraIcon />
+                }
+              </label>
+              <input
+                type="file"
+                name="vendorsImag"
+                id="vendorsImage"
+                onChange={(e) => setvendorsImage(e.target.files[0])}
+                accept="image/*"
+                hidden
+              />
             </div>
-            :
-            <CameraIcon />
-          }
-        </label>
-        <input
-          type="file"
-          name="vendorsImag"
-          id="vendorsImag"
-          onChange={(e) => setvendorsImage(e.target.files[0])}
-          accept="image/*"
-          hidden
-        />
-      </div>
           </div>
         ))}
       </div>
       <div className="flex mt-4">
         <button
           className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded mr-2"
-          onClick={handleAddEntry}
+          onClick={(e)=> {
+            e.stopPropagation()
+            e.nativeEvent.preventDefault()
+            handleAddEntry(e)
+          }}
         >
           Add New Entry
         </button>
         <button
           className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded mr-2"
-          onClick={log}
+          onClick={(e) => {
+            e.stopPropagation()
+            e.nativeEvent.preventDefault()
+            log(e)
+          }}
         >
         log
         </button>

@@ -15,7 +15,8 @@ const registeredUsers = [
     "stake1u9ygt5v0zlpv6aadcyf3exrucv2ysljv9820kncjralc4dqxps9c6",
     "stake1uyyuucsv4meau0xcmzw2mqqw36ghur4yj9t4gw9dn7thxesxcysd5",
     "stake1u93737jwhu3kcunrcvhzdgq7lrgnhzm44j5q3njpj5rv7rqpqw66g",
-    "stake1u9kg8q0gu69lz6tf2x86nt7eg07pg48cqz9tfqguuh89hncyug35n"
+    "stake1u9kg8q0gu69lz6tf2x86nt7eg07pg48cqz9tfqguuh89hncyug35n",
+    "stake1uxd45azua8umpjdswhe5k25fap7wyd2x9zg8uvm4n3rk2gc20dtsd"
 ]
 
 export default async function handler (req, res) {

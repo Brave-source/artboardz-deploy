@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const MONGO_URL = "mongodb+srv://emmyweb:FmUJxHmfqpxl8gTg@artboardz.b8xqc.mongodb.net/artboardz?retryWrites=true&w=majority"
+const MONGO_URL = process.env.NEXT_PUBLIC_MONGO_URL
 // FmUJxHmfqpxl8gTg
 if(!MONGO_URL) {
     throw new Error('Please define the MONGO_URL environment variable inside .env.local')

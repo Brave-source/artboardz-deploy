@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialUIState = {
   AddCollectionFormIsShown: false,
   EditCollectionFormIsShown: false,
+  isEditVendorsForm: false,
 };
 
 const UIslice = createSlice({
@@ -21,6 +22,12 @@ const UIslice = createSlice({
     hideEditCollectionForm(state) {
       state.EditCollectionFormIsShown = false;
     },
+    showEditVendorsForm(state) {
+      state.isEditVendorsForm = true;
+    },
+    hideEditVendorsForm(state) {
+      state.isEditVendorsForm = false;
+    },
   },
 });
 
@@ -30,5 +37,7 @@ export const AddCollectionFormIsShown = (state) =>
   state.UI.AddCollectionFormIsShown;
 export const EditCollectionFormIsShown = (state) =>
   state.UI.EditCollectionFormIsShown;
+export const isEditVendorsForm = (state) =>
+  state.UI.isEditVendorsForm;
 
 export default UIReducer;
