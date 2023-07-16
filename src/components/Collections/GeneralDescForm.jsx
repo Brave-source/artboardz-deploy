@@ -46,6 +46,7 @@ console.log(entries)
       title: '',
       desc: '',
       img: '',
+      link:''
     };
     setEntries([...entries, newEntry]);
   };
@@ -579,6 +580,15 @@ console.log(entries)
                 onChange={(e) => handleInputChange(index, 'desc', e.target.value)}
               ></textarea>
             </div>
+            <div className="mb-4">
+              <input
+                type="text"
+                placeholder="Link"
+                className="focus:bg-transparent bg-[#272832] border border-gray-300 rounded px-2 py-1 w-full"
+                value={entry.link}
+                onChange={(e) => handleInputChange(index, 'title', e.target.value)}
+              />
+            </div>
             <div className="flex flex-col  ">
               <span className="text-[#B3B5BD] text-base">
               Image
@@ -616,18 +626,9 @@ console.log(entries)
             handleAddEntry(e)
           }}
         >
-          Add New Entry
+          Add Location
         </button>
-        <button
-          className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded mr-2"
-          onClick={(e) => {
-            e.stopPropagation()
-            e.nativeEvent.preventDefault()
-            log(e)
-          }}
-        >
-        log
-        </button>
+      
       </div>
     </div>
         </div>

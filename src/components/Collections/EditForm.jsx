@@ -13,11 +13,43 @@ import axios from 'axios';
 import validation from "./FormValidation";
 import CameraIcon from "../../Assets/Icons/CameraIcon";
 import { baseURL } from "../../utils/url";
-import { AddCollectionFormIsShown, UIActions, } from "../../store/redux-store/UI-slice";
+import { AddCollectionFormIsShown, UIActions } from "../../store/redux-store/UI-slice";
 import { updateCollectionFailure, updateCollectionStart, updateCollectionSuccess } from "../../store/redux-store/CollectionSlice";
 
 const GeneralDescForm = ({ id, setIsOpen, collection }) => {
  
+  const [entries, setEntries] = useState([]);
+
+  const log =(e) =>{
+    e.stopPropagation()
+  }
+  const handleInputChange = (index, field, value) => {
+    const newEntries = [...entries];
+    if(field == 'lat' || field == 'lng') {
+      newEntries[index].position = {
+        ...newEntries[index].position,
+        [field]: value,
+      };
+    } else {
+      newEntries[index][field] = value;
+    }
+    setEntries(newEntries);
+  };
+console.log(entries)
+  const handleAddEntry = (e) => {
+    e.stopPropagation()
+    const newEntry = {
+      position: {
+        lat: "",
+        lng: "" 
+      },
+      title: '',
+      desc: '',
+      img: '',
+      link:'',
+    };
+    setEntries([...entries, newEntry]);
+  };
   const [inputs, setInputs] = useState({});
   const [errors, setErrors] = useState({});
   const [Banner, setBanner] = useState(null);
@@ -61,7 +93,11 @@ const GeneralDescForm = ({ id, setIsOpen, collection }) => {
     evt.preventDefault();
     setIsOpen((prev) => !prev)
   };
-
+  const handleChange = (e) => {
+    setInputs((prev) => {
+      return { ...prev, [e.target.name]: e.target.value };
+    });
+  };
   const uploadFile = (file, urlType) => {
     const storage = getStorage(app);
     const fileName = new Date().getTime() + file.name;
@@ -155,7 +191,7 @@ const GeneralDescForm = ({ id, setIsOpen, collection }) => {
     title,
     artDesc,
     webLink,
-    _id: id,
+    _id: id
   }
   const formSubmitHandler = async (evt) => {
     evt.preventDefault();
@@ -163,8 +199,8 @@ const GeneralDescForm = ({ id, setIsOpen, collection }) => {
     dispatch(updateCollectionStart());
     
     try {
-      // const res = await axios.put(`http://localhost:3000/api/collections/${id}`, updateInput)
-      const res = await axios.put(globalURL == "www" ? `${externalURL}/api/collections/${id}` :`${baseURL}/api/collections/${id}`,updateInput);
+      const res = await axios.put(`http://localhost:3000/api/collections/${id}`, updateInput)
+      // const res = await axios.put(globalURL == "www" ? `${externalURL}/api/collections/${id}` :`${baseURL}/api/collections/${id}`,updateInput);
       dispatch(updateCollectionSuccess({id, updateInput}));
       setIsOpen((prev) => !prev)
       toast.success("Successfully edited")
@@ -176,8 +212,7 @@ const GeneralDescForm = ({ id, setIsOpen, collection }) => {
   };
 
   return (
-    <>
-      <form className="grid grid-cols-3 gap-4" onSubmit={formSubmitHandler}>
+    <form className="grid grid-cols-3 gap-4" onSubmit={formSubmitHandler}>
     <div className="flex flex-col">
       <label htmlFor="policy" className="text-[#B3B5BD] text-base">
         Policy
@@ -570,7 +605,8 @@ const GeneralDescForm = ({ id, setIsOpen, collection }) => {
       >
         {physicalArtboard && physicalArtboardUrl ?
         <div style={{width: '100%', height: '100%', position: 'relative'}}>
-          <Image src={physicalArtboardUrl} fill objectFit='contain'/>
+          <Image src={physicalArtboardUrl} fill
+  objectFit='contain'/>
           </div>
           :
           <div style={{width: '100%', height: '100%', position: 'relative'}}>
@@ -593,8 +629,102 @@ const GeneralDescForm = ({ id, setIsOpen, collection }) => {
       />
     </div>
     </div>
+    <div className="col-span-2">
+      <div className="container mx-auto p-4">
+      <div className="grid grid-cols-2 gap-4">
+        { entries && entries?.map((entry, index) => (
+          <div key={index} className="border rounded p-4">
+            <h3 className="text-xl mb-2">Entry {index + 1}</h3>
+            <div className="mb-4">
+              <input
+                type="text"
+                placeholder="latitude"
+                className="focus:bg-transparent bg-[#272832] border border-gray-300 rounded px-2 py-1 w-full"
+                value={entry.position.lat}
+                onChange={(e) => handleInputChange(index, 'lat', e.target.value)}
+              />
+            </div>
+            <div className="mb-4">
+              <input
+                type="text"
+                placeholder="longitude"
+                className="focus:bg-transparent bg-[#272832] border border-gray-300 rounded px-2 py-1 w-full"
+                value={entry.position.lng}
+                onChange={(e) => handleInputChange(index, 'lng', e.target.value)}
+              />
+            </div>
+            <div className="mb-4">
+              <input
+                type="text"
+                placeholder="Title"
+                className="focus:bg-transparent bg-[#272832] border border-gray-300 rounded px-2 py-1 w-full"
+                value={entry.title}
+                onChange={(e) => handleInputChange(index, 'title', e.target.value)}
+              />
+            </div>
+            <div>
+              <textarea
+                placeholder="Description"
+                className="focus:bg-transparent bg-[#272832] border border-gray-300 rounded px-2 py-1 w-full"
+                value={entry.desc}
+                onChange={(e) => handleInputChange(index, 'desc', e.target.value)}
+              ></textarea>
+            </div>
+            <div className="mb-4">
+              <input
+                type="text"
+                placeholder="Link"
+                className="focus:bg-transparent bg-[#272832] border border-gray-300 rounded px-2 py-1 w-full"
+                value={entry.link}
+                onChange={(e) => handleInputChange(index, 'title', e.target.value)}
+              />
+            </div>
+            <div className="flex flex-col  ">
+              <span className="text-[#B3B5BD] text-base">
+              Image
+              </span>
+              <label
+                htmlFor="vendorsImage"
+                className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-[150px] text-base px-3 flex items-center justify-center"
+              >
+                {vendorsImage && vendorsImageUrl ?
+                <div style={{width: '100%', height: '100%', position: 'relative'}}>
+                  <Image src={entry.img? entry.img : vendorsImageUrl} fill objectFit='contain'/>
+                  </div>
+                  :
+                  <CameraIcon />
+                }
+              </label>
+              <input
+                type="file"
+                name="vendorsImag"
+                id="vendorsImage"
+                onChange={(e) => setvendorsImage(e.target.files[0])}
+                accept="image/*"
+                hidden
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="flex mt-4">
+        <button
+          className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded mr-2"
+          onClick={(e)=> {
+            e.stopPropagation()
+            e.nativeEvent.preventDefault()
+            handleAddEntry(e)
+          }}
+        >
+          Add Location
+        </button>
+      
+      </div>
+    </div>
+        </div>
     <div className="grid grid-cols-2 gap-3 col-span-full">
     <footer className=" flex justify-center gap-6  col-span-2">
+    
       <button
         onClick={hideFormHandler}
         className="px-[20px] py-[10px] border border-white rounded-md text-sm"
@@ -612,7 +742,6 @@ const GeneralDescForm = ({ id, setIsOpen, collection }) => {
     </footer>
     </div>
   </form>
-    </>
   );
 };
 
