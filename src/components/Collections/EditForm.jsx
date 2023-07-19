@@ -199,8 +199,8 @@ console.log(entries)
     dispatch(updateCollectionStart());
     
     try {
-      const res = await axios.put(`http://localhost:3000/api/collections/${id}`, updateInput)
-      // const res = await axios.put(globalURL == "www" ? `${externalURL}/api/collections/${id}` :`${baseURL}/api/collections/${id}`,updateInput);
+      // const res = await axios.put(`http://localhost:3000/api/collections/${id}`, updateInput)
+      const res = await axios.put(globalURL == "www" ? `${externalURL}/api/collections/${id}` :`${baseURL}/api/collections/${id}`,updateInput);
       dispatch(updateCollectionSuccess({id, updateInput}));
       setIsOpen((prev) => !prev)
       toast.success("Successfully edited")
