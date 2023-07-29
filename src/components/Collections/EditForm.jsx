@@ -81,13 +81,15 @@ console.log(entries)
   const [artDesc, setArtDesc] = useState(collection.artDesc)
   const [instagram, setInstagram] = useState(collection.instagram)
   const [discord, setDiscord] = useState(collection.discord)
-  const [website, setWebsite]= useState(collection.website)
   const [newRelease, setNewRelease] = useState(collection.newRelease)
   const [jpgLink, setJpgLink] = useState(collection.jpgLink)
   const [nmkrLink, setNmkrLink] = useState(collection.nmkrLink)
   const [mintingDetails, setMintingDetails] = useState(collection.mintingDetails)
   const [royalty, setRoyalty] = useState(collection.royalty)
   const [webLink, setWebLink] = useState(collection.webLink)
+  const [wallet, setWallet] = useState(collection.wallet)
+  const [lat, setLat] = useState(collection.lat)
+  const [lng, setLng] = useState(collection.lng)
   
   const hideFormHandler = (evt) => {
     evt.preventDefault();
@@ -191,6 +193,9 @@ console.log(entries)
     title,
     artDesc,
     webLink,
+    wallet,
+    lat,
+    lng,
     _id: id
   }
   const formSubmitHandler = async (evt) => {
@@ -199,8 +204,8 @@ console.log(entries)
     dispatch(updateCollectionStart());
     
     try {
-      const res = await axios.put(`http://localhost:3000/api/collections/${id}`, updateInput)
-      // const res = await axios.put(globalURL == "www" ? `${externalURL}/api/collections/${id}` :`${baseURL}/api/collections/${id}`,updateInput);
+      // const res = await axios.put(`http://localhost:3000/api/collections/${id}`, updateInput)
+      const res = await axios.put(globalURL == "www" ? `${externalURL}/api/collections/${id}` :`${baseURL}/api/collections/${id}`,updateInput);
       dispatch(updateCollectionSuccess({id, updateInput}));
       setIsOpen((prev) => !prev)
       toast.success("Successfully edited")
@@ -397,6 +402,45 @@ console.log(entries)
         id="JPG"
         onChange={(e)=> setJpgLink(e.target.value)}
         value={jpgLink}
+        className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
+      />
+    </div>
+    <div className="flex flex-col">
+      <label htmlFor="wallet" className="text-[#B3B5BD] text-base">
+        Artist Wallet
+      </label>
+      <input
+        type="text"
+        name="wallet"
+        id="wallet"
+        onChange={(e)=> setWallet(e.target.value)}
+        value={wallet}
+        className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
+      />
+    </div>
+    <div className="flex flex-col">
+      <label htmlFor="lat" className="text-[#B3B5BD] text-base">
+        Latitude
+      </label>
+      <input
+        type="number"
+        name="lat"
+        id="lat"
+        onChange={(e)=> setLat(e.target.value)}
+        value={lat}
+        className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
+      />
+    </div>
+    <div className="flex flex-col">
+      <label htmlFor="lng" className="text-[#B3B5BD] text-base">
+        Longitude
+      </label>
+      <input
+        type="number"
+        name="lng"
+        id="lng"
+        onChange={(e)=> setLng(e.target.value)}
+        value={lng}
         className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
       />
     </div>
