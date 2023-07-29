@@ -93,6 +93,18 @@ const CollectionSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    wallet: {
+        type: String,
+        required: true
+    },
+    lat: {
+        type: Number,
+        default: 0,
+    },
+    lng: {
+        type: Number,
+        default: 0
+    },
     patronId: {
         type: [String],
         default: []
