@@ -335,7 +335,18 @@ console.log(entries)
         </select>
       )}
     </div>
-    <div></div>
+    <div className="flex flex-col">
+        <label htmlFor="country" className="text-[#B3B5BD] text-base">
+          Artist Wallet
+        </label>
+        <input
+          type="text"
+          name="wallet"
+          id="Wallet"
+          // onChange={}
+          className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
+        />
+      </div>
     <div className="flex flex-col">
       <label htmlFor="country" className="text-[#B3B5BD] text-base">
         Country
