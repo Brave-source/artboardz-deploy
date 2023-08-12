@@ -99,11 +99,11 @@ const CollectionSchema = new mongoose.Schema({
     },
     lat: {
         type: Number,
-        default: 0,
+        required: true,
     },
     lng: {
         type: Number,
-        default: 0
+        required: true,
     },
     patronId: {
         type: [String],

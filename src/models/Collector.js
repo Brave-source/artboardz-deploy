@@ -1,9 +1,26 @@
 import mongoose from "mongoose";
 
 const UserSchema = mongoose.Schema({
-    name: {
+    username: {
         type: String,
         required: false
+    },
+    firstName: {
+        type: String,
+        required: true,
+    },
+    lastName: {
+        type: String,
+        required: true,
+    },
+    email: {
+        type: String,
+        required: false,
+        unique: true
+    },
+    password: {
+        type: String,
+        required: false,
     },
     image: {
         type: String,
@@ -17,9 +34,13 @@ const UserSchema = mongoose.Schema({
         type: String,
         required: false,
     },
-    stakeAddress: {
+    address: {
+        type: [String],
+        default: [],
+    },
+    artboardTag: {
         type: String,
-        required: true,
+        required: false
     },
     display: {
         type: Boolean,
@@ -50,10 +71,14 @@ const UserSchema = mongoose.Schema({
         }],
         default: []
     },
+    display: {
+        type: Boolean,
+         default: false
+    },
     policyIds: {
         type: [String],
         default: []
-    }
-}, {timestamp: true});
+    },
+}, {timestamps: true});
 
 export default mongoose.models.User || mongoose.model("User", UserSchema)

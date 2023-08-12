@@ -35,7 +35,6 @@ const GeneralDescForm = ({ id, setIsOpen, collection }) => {
     }
     setEntries(newEntries);
   };
-console.log(entries)
   const handleAddEntry = (e) => {
     e.stopPropagation()
     const newEntry = {
@@ -204,8 +203,8 @@ console.log(entries)
     dispatch(updateCollectionStart());
     
     try {
-      // const res = await axios.put(`http://localhost:3000/api/collections/${id}`, updateInput)
-      const res = await axios.put(globalURL == "www" ? `${externalURL}/api/collections/${id}` :`${baseURL}/api/collections/${id}`,updateInput);
+      const res = await axios.put(`http://localhost:3000/api/collections/${id}`, updateInput)
+      // const res = await axios.put(globalURL == "www" ? `${externalURL}/api/collections/${id}` :`${baseURL}/api/collections/${id}`,updateInput);
       dispatch(updateCollectionSuccess({id, updateInput}));
       setIsOpen((prev) => !prev)
       toast.success("Successfully edited")
@@ -348,7 +347,7 @@ console.log(entries)
           type="text"
           name="wallet"
           id="Wallet"
-          // onChange={}
+          onChange={setWallet(e.target.value)}
           className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
         />
       </div>
@@ -423,7 +422,7 @@ console.log(entries)
         Latitude
       </label>
       <input
-        type="number"
+        type="text"
         name="lat"
         id="lat"
         onChange={(e)=> setLat(e.target.value)}
@@ -436,7 +435,7 @@ console.log(entries)
         Longitude
       </label>
       <input
-        type="number"
+        type="text"
         name="lng"
         id="lng"
         onChange={(e)=> setLng(e.target.value)}
