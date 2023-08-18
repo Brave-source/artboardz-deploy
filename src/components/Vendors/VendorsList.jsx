@@ -8,19 +8,19 @@ const VendorsList = () => {
         <div className="bg-[#14171F] p-5 text-center text-sm font-semibold">
             <div className="grid grid-cols-6 place-items-center text-white">
                 <div className="flex gap-2 items-center">
-                    <p>Policy</p>
+                    <p>Image</p>
                 </div>
                 <div className="flex gap-2 items-center">
-                    <p>Artist Name</p>
+                    <p>User name</p>
                 </div>
                 <div className="flex gap-2 items-center">
-                    <p>Artboard Title</p>
+                    <p>Partner Name</p>
                 </div>
                 <div className="flex gap-2 items-center">
-                    <p>Location</p>
+                    <p>Contact number</p>
                 </div>
                 <div className="flex gap-2 items-center">
-                    <p>Supply</p>
+                    <p>Business tipe</p>
                 </div>
                 <div>
                     <p>Action</p>

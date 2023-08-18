@@ -42,14 +42,14 @@ export const Navbar = () => {
           </Link>
         </li>
         <li>
-          <Link className={activeClassHandler} href="/vendors">
+          <Link className={activeClassHandler} href="/merchants">
             <span
               aria-hidden
               className="flex justify-center  h-[2rem]"
             >
               <CollectionsIcons />
               <p>
-                Vendors
+                Merchants
               </p>
             </span>
             
