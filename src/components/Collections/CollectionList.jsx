@@ -1,5 +1,5 @@
 import axios from "axios";
-import {useEffect, useState} from "react";
+import {useEffect } from "react";
 import CollectionItem from "./CollectionsIItem";
 import { useDispatch, useSelector } from "react-redux";
 import { getCollectionFailure, getCollectionStart, getCollectionSuccess } from "../../store/redux-store/CollectionSlice";
