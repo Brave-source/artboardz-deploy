@@ -347,7 +347,7 @@ const GeneralDescForm = ({ id, setIsOpen, collection }) => {
           type="text"
           name="wallet"
           id="Wallet"
-          onChange={setWallet(e.target.value)}
+          onChange={(e) => setWallet(e.target.value)}
           className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
         />
       </div>
@@ -683,7 +683,7 @@ const GeneralDescForm = ({ id, setIsOpen, collection }) => {
       />
     </div>
     </div>
-    <div className="col-span-2">
+    {/* <div className="col-span-2">
       <div className="container mx-auto p-4">
       <div className="grid grid-cols-2 gap-4">
         { entries && entries?.map((entry, index) => (
@@ -775,7 +775,7 @@ const GeneralDescForm = ({ id, setIsOpen, collection }) => {
       
       </div>
     </div>
-        </div>
+    </div> */}
     <div className="grid grid-cols-2 gap-3 col-span-full">
     <footer className=" flex justify-center gap-6  col-span-2">
     

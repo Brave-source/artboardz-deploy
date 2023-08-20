@@ -167,7 +167,6 @@ console.log(entries)
     vendors: entries,
   }
 
-  console.log(data)
   const formSubmitHandler = async(evt) => {
     evt.preventDefault();
     // setErrors(validation(inputs))
@@ -348,23 +347,11 @@ console.log(entries)
         />
       </div>
       <div className="flex flex-col">
-        <label htmlFor="wallet" className="text-[#B3B5BD] text-base">
-          Artist wallet
-        </label>
-        <input
-          type="text"
-          name="wallet"
-          id="wallet"
-          onChange={handleChange}
-          className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
-        />
-      </div>
-      <div className="flex flex-col">
         <label htmlFor="lng" className="text-[#B3B5BD] text-base">
           Longitude
         </label>
         <input
-          type="number"
+          type="text"
           name="lng"
           id="lng"
           onChange={handleChange}
@@ -376,7 +363,7 @@ console.log(entries)
           Latitude
         </label>
         <input
-          type="number"
+          type="text"
           name="lat"
           id="lat"
           onChange={handleChange}

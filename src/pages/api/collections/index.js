@@ -17,8 +17,10 @@ export default async function handler (req, res) {
     }
 
     if(method === "POST") {
+        const vendors = req.body.vendors;
         try {
             const collection = await Collection.create(req.body);
+            
             res.status(200).json(collection);
         }catch(err) {
             res.status(500).json(err);
