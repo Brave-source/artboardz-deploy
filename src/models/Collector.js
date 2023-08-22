@@ -7,15 +7,15 @@ const UserSchema = mongoose.Schema({
     },
     firstName: {
         type: String,
-        required: true,
+        required: false,
     },
     lastName: {
         type: String,
-        required: true,
+        required: false,
     },
     email: {
         type: String,
-        required: false,
+        required: true,
         unique: true
     },
     password: {
@@ -25,6 +25,11 @@ const UserSchema = mongoose.Schema({
     image: {
         type: String,
         default: ""
+    },
+    contact: {
+        type: Number,
+        required: false,
+        unique: true,
     },
     nationality: {
         type: String, 

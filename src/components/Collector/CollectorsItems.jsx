@@ -68,7 +68,8 @@ const CollectorsItems = ({
   const deleteCollector = async(id) => {
     dispatch(deleteCollectorStart())
     try {
-      await axios.delete(globalURL == "www" ? `${externalURL}/api/collectors/${id}`:`${baseURL}/api/collectors/${id}`);
+      await axios.delete(`http://localhost:3000/api/collectors/${id}`)
+      // await axios.delete(globalURL == "www" ? `${externalURL}/api/collectors/${id}`:`${baseURL}/api/collectors/${id}`);
       dispatch(deleteCollectorSuccess(id))
       toast.success("Successfully deleted")
     }catch(err){
@@ -121,7 +122,11 @@ const CollectorsItems = ({
           <input type="checkbox" className="toggle toggle-xs" onChange={handleDisplay} />
           <CloseIcon onClick={toggleActionHandler} className="relative bottom-4 left-4"/>
         </p>
-        <button onClick={() => deleteCollector(id)}>
+        <button onClick={(e) => {
+          e.stopPropagation()
+          e.nativeEvent.preventDefault()
+          confirmDelete(id)
+        }}>
           Delete User
         </button>
       </div>

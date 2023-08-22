@@ -2,6 +2,7 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import UIReducer from "./UI-slice";
 import collectionReducer from './CollectionSlice';
 import collectorReducer from './CollectorSlice';
+import merchantReducer from './MerchantSlice';
 import adminReducer from "./AdminSlice";
 import {
   persistStore,
@@ -21,7 +22,13 @@ const persistConfig = {
   storage,
 };
 
-const rootReducer = combineReducers({ UI: UIReducer, collection: collectionReducer, admin: adminReducer, collector: collectorReducer });
+const rootReducer = combineReducers({ 
+  UI: UIReducer, 
+  collection: collectionReducer, 
+  admin: adminReducer, 
+  collector: collectorReducer,
+  merchant: merchantReducer, 
+});
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

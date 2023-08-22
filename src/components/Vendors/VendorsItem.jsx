@@ -5,44 +5,78 @@ import EditIcon from '../../Assets/Icons/EditIcon';
 import { TrashIcon } from "@heroicons/react/24/outline";
 import MerchantsEdit from './MerchantsEdit';
 import { useState } from 'react';
+import Notiflix from "notiflix";
+import { deleteMerchantFailure, deleteMerchantStart, deleteMerchantSuccess } from '../../store/redux-store/MerchantSlice';
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
 
-const VendorsItem = () => {
+const VendorsItem = ({merchants}) => {
   // Placeholder array with 3 objects to create 3 rows
-  const placeholderData = [
-    { userName: 'User Name 1', partnerName: 'Partner Name 1', contactNumber: '123-456-7890', businessType: 'Type 1' },
-    { userName: 'User Name 2', partnerName: 'Partner Name 2', contactNumber: '123-456-7891', businessType: 'Type 2' },
-    { userName: 'User Name 3', partnerName: 'Partner Name 3', contactNumber: '123-456-7892', businessType: 'Type 3' },
-  ];
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const dispatch = useDispatch();
+
   const toggleMerchantModal = () => {
     setIsModalOpen(!isModalOpen);
   };
+  const confirmDelete = (id) => {
+    Notiflix.Confirm.show(
+      "Delete merchant!!!",
+      "You are about to delete this merchant",
+      "Delete",
+      "Cancel",
+      function okCb() {
+        deleteMerchant(id);
+      },
+      function cancelCb() {
+        console.log("Delete Canceled");
+      },
+      {
+        width: "320px",
+        borderRadius: "3px",
+        titleColor: "orangered",
+        okButtonBackground: "orangered",
+        cssAnimationStyle: "zoom",
+      }
+    );
+  };
+
+  const deleteMerchant = async(id) => {
+    dispatch(deleteMerchantStart())
+    try {
+      // globalURL == "www" ? `${externalURL}/api/merchants/${id}` :`${baseURL}/api/merchants/${id}`
+      await axios.delete(`http://localhost:3000/api/merchants/${id}`);
+      dispatch(deleteMerchantSuccess(id))
+    }catch(err){
+      console.log(err);
+      dispatch(deleteMerchantFailure())
+    }
+  }
 
   return (
     <div>
-      {placeholderData.map((item, index) => (
+      {merchants.map((item, index) => (
         <div className="grid grid-cols-6 space-y-2 place-items-center text-black" key={index}>
           <div className="flex gap-2 items-center ml-6">
-            <Image src={DefoultImage} alt="Placeholder" className="h-8 w-8"/> {/* Placeholder for image */}
+            <Image src={item?.partnerImage? item?.partnerImage : DefoultImage} width={100} height={100} alt="Placeholder" className="h-8 w-8"/> {/* Placeholder for image */}
           </div>
           <div className="flex gap-2 items-center">
-            <p>{item.userName}</p> {/* Placeholder for user name */}
+            <p>{item?.username}</p> {/* Placeholder for user name */}
           </div>
           <div className="flex gap-2 items-center">
-            <p>{item.partnerName}</p> {/* Placeholder for partner name */}
+            <p>{item?.partnerName}</p> {/* Placeholder for partner name */}
           </div>
           <div className="flex gap-2 items-center">
-            <p>{item.contactNumber}</p> {/* Placeholder for contact number */}
+            <p>{item?.contactNumber1}</p> {/* Placeholder for contact number */}
           </div>
           <div className="flex gap-2 items-center">
-            <p>{item.businessType}</p> {/* Placeholder for business type */}
+            <p>{item?.type}</p> {/* Placeholder for business type */}
           </div>
           <div>
           <div className="grid grid-cols-2 py-5 place-items-left mr-6">
         <button onClick={toggleMerchantModal}>
           <EditIcon />
         </button>
-        <button onClick={() => confirmDelete(id)}>
+        <button onClick={() => confirmDelete(item?._id)}>
             <TrashIcon className="w-5 h-5" />
           </button>
       </div>

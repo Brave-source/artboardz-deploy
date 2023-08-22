@@ -1,8 +1,11 @@
 import React from 'react';
 import Card from '../UI/Card';
 import VendorsItem from './VendorsItem';
+import { useSelector } from 'react-redux';
 
 const VendorsList = () => {
+    const merchants = useSelector((state) => state.merchant.merchants)
+
   return (
     <Card>
         <div className="bg-[#14171F] p-5 text-center text-sm font-semibold">
@@ -20,14 +23,14 @@ const VendorsList = () => {
                     <p>Contact number</p>
                 </div>
                 <div className="flex gap-2 items-center">
-                    <p>Business tipe</p>
+                    <p>Business type</p>
                 </div>
                 <div>
                     <p>Action</p>
                 </div>
             </div>
         </div>
-        <VendorsItem />
+        <VendorsItem merchants={merchants} />
     </Card>
   );
 }
