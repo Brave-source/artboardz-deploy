@@ -363,6 +363,7 @@ console.log(formData)
             placeholder="Address"
             className="bg-[#07245B] border px-3 border-white rounded h-10 focus:outline-blue-500"
           />
+         
         </div>
         <div className="flex gap-2 flex-col w-full">
           <label htmlFor="Contact Number2">Contact Number</label>
@@ -374,7 +375,30 @@ console.log(formData)
             placeholder="Contact Number"
             className="bg-[#07245B] border px-3 border-white rounded h-10 focus:outline-blue-500"
           />
+          
         </div>
+        <div className="flex gap-2 flex-col w-full">
+        <label htmlFor="Longitude">Longitude</label>
+        <input
+            type="Longitude"
+            name="longitude"
+            // value={formData.address}
+            onChange={handleChange}
+            placeholder="Longitude"
+            className="bg-[#07245B] border px-3 border-white rounded h-10 focus:outline-blue-500"
+          />
+          </div>
+          <div className="flex gap-2 flex-col w-full">
+           <label htmlFor="Latitude">Latitude</label>
+           <input
+            type="Latitude"
+            name="latitude"
+            // value={formData.address}
+            onChange={handleChange}
+            placeholder="Latitude"
+            className="bg-[#07245B] border px-3 border-white rounded h-10 focus:outline-blue-500"
+          />
+          </div>
         <div className="flex gap-2 flex-col w-full col-span-4 h-[120px]">
           <label htmlFor="Description">Description</label>
           <textarea

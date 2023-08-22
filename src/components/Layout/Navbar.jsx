@@ -55,6 +55,20 @@ export const Navbar = () => {
             
           </Link>
         </li>
+        <li>
+          <Link className={activeClassHandler} href="/locations">
+            <span
+              aria-hidden
+              className="flex justify-center  h-[2rem]"
+            >
+              <CollectionsIcons />
+              <p>
+                Locations
+              </p>
+            </span>
+            
+          </Link>
+        </li>
       </ul>
     </nav>
   );
