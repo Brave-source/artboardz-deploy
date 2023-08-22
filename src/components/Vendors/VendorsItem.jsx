@@ -5,7 +5,9 @@ import EditIcon from '../../Assets/Icons/EditIcon';
 import { TrashIcon } from "@heroicons/react/24/outline";
 import MerchantsEdit from './MerchantsEdit';
 import { useState } from 'react';
-
+import AddTaskIcon from '@mui/icons-material/AddTask';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import PreviewIcon from '@mui/icons-material/Preview';
 const VendorsItem = () => {
   // Placeholder array with 3 objects to create 3 rows
   const placeholderData = [
@@ -38,12 +40,15 @@ const VendorsItem = () => {
             <p>{item.businessType}</p> {/* Placeholder for business type */}
           </div>
           <div>
-          <div className="grid grid-cols-2 py-5 place-items-left mr-6">
+          <div className="grid grid-cols-3 py-5 place-items-left mr-6">
         <button onClick={toggleMerchantModal}>
-          <EditIcon />
+          <PreviewIcon />
         </button>
         <button onClick={() => confirmDelete(id)}>
-            <TrashIcon className="w-5 h-5" />
+            <AddTaskIcon className="w-5 h-5" />
+          </button>
+          <button onClick={() => confirmDelete(id)}>
+            <HighlightOffIcon className="w-5 h-5" />
           </button>
       </div>
           </div>
