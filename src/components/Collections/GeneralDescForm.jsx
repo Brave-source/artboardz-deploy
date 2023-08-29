@@ -196,6 +196,18 @@ console.log(entries)
           className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
         />
       </div>
+      <div className="flex flex-col">
+        <label htmlFor="uid" className="text-[#B3B5BD] text-base">
+          Collection UID
+        </label>
+        <input
+          type="text"
+          name="uid"
+          id="uid"
+          onChange={handleChange}
+          className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
+        />
+      </div>
      
       <div className="flex flex-col">
         <label htmlFor="Artboard Title" className="text-[#B3B5BD] text-base">
@@ -345,32 +357,7 @@ console.log(entries)
           onChange={handleChange}
           className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
         />
-      </div>
-      <div className="flex flex-col">
-        <label htmlFor="lng" className="text-[#B3B5BD] text-base">
-          Longitude
-        </label>
-        <input
-          type="text"
-          name="lng"
-          id="lng"
-          onChange={handleChange}
-          className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
-        />
-      </div>
-      <div className="flex flex-col">
-        <label htmlFor="lat" className="text-[#B3B5BD] text-base">
-          Latitude
-        </label>
-        <input
-          type="text"
-          name="lat"
-          id="lat"
-          onChange={handleChange}
-          className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
-        />
-      </div>
-      
+      </div>     
       <div className="flex flex-col col-span-full">
         <label
           htmlFor="Artboard Description"

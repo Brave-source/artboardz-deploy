@@ -1,0 +1,18 @@
+.filterContainer {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    gap: 30px;
+    margin: 0 20px 5px 0;
+    color: white;
+}
+.button {
+    background-color: #14171F;
+    padding: 3px 10px;
+    border-radius: 5px;
+}
+.filters {
+    background-color: #14171F;
+    padding: 3px;
+    border-radius: 5px;
+}

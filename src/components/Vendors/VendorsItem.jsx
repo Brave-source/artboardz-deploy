@@ -8,7 +8,8 @@ import { useState } from 'react';
 import AddTaskIcon from '@mui/icons-material/AddTask';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import PreviewIcon from '@mui/icons-material/Preview';
-const VendorsItem = () => {
+import { useDispatch } from 'react-redux';
+const VendorsItem = ({merchants}) => {
   // Placeholder array with 3 objects to create 3 rows
   const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
@@ -52,7 +53,7 @@ const VendorsItem = () => {
 
   return (
     <div>
-      {merchants.map((item, index) => (
+      {merchants?.map((item, index) => (
         <div className="grid grid-cols-6 space-y-2 place-items-center text-black" key={index}>
           <div className="flex gap-2 items-center ml-6">
             <Image src={item?.partnerImage? item?.partnerImage : DefoultImage} width={100} height={100} alt="Placeholder" className="h-8 w-8"/> {/* Placeholder for image */}

@@ -9,6 +9,10 @@ const CollectionSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    uid: {
+        type: String,
+        required: true,
+    },
     policy: {
         type: String,
         required: true
@@ -96,14 +100,6 @@ const CollectionSchema = new mongoose.Schema({
     wallet: {
         type: String,
         required: true
-    },
-    lat: {
-        type: Number,
-        required: true,
-    },
-    lng: {
-        type: Number,
-        required: true,
     },
     patronId: {
         type: [String],

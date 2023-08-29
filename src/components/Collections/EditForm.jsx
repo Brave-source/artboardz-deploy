@@ -68,6 +68,7 @@ const GeneralDescForm = ({ id, setIsOpen, collection }) => {
 
   const { isFetching } = useSelector((collection) => collection.collection);
   const [policy, setPolicy] = useState(collection.policy);
+  const [uid, setUid] = useState(collection.uid);
   const [price, setPrice] = useState(collection.price);
   const [supply, setSupply] = useState(collection.supply)
   const [mintDate, setMintDate] = useState(collection.mintDate)
@@ -87,18 +88,12 @@ const GeneralDescForm = ({ id, setIsOpen, collection }) => {
   const [royalty, setRoyalty] = useState(collection.royalty)
   const [webLink, setWebLink] = useState(collection.webLink)
   const [wallet, setWallet] = useState(collection.wallet)
-  const [lat, setLat] = useState(collection.lat)
-  const [lng, setLng] = useState(collection.lng)
   
   const hideFormHandler = (evt) => {
     evt.preventDefault();
     setIsOpen((prev) => !prev)
   };
-  const handleChange = (e) => {
-    setInputs((prev) => {
-      return { ...prev, [e.target.name]: e.target.value };
-    });
-  };
+  
   const uploadFile = (file, urlType) => {
     const storage = getStorage(app);
     const fileName = new Date().getTime() + file.name;
@@ -193,8 +188,7 @@ const GeneralDescForm = ({ id, setIsOpen, collection }) => {
     artDesc,
     webLink,
     wallet,
-    lat,
-    lng,
+    uid,
     _id: id
   }
   const formSubmitHandler = async (evt) => {
@@ -228,6 +222,19 @@ const GeneralDescForm = ({ id, setIsOpen, collection }) => {
         disabled
         onChange={(e) => setPolicy(e.target.value)}
         value={policy}
+        className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
+      />
+    </div>
+    <div className="flex flex-col">
+      <label htmlFor="uid" className="text-[#B3B5BD] text-base">
+        Project UID
+      </label>
+      <input
+        type="text"
+        name="uid"
+        id="uid"
+        onChange={(e) => setUid(e.target.value)}
+        value={uid}
         className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
       />
     </div>
@@ -416,34 +423,7 @@ const GeneralDescForm = ({ id, setIsOpen, collection }) => {
         value={wallet}
         className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
       />
-    </div>
-    <div className="flex flex-col">
-      <label htmlFor="lat" className="text-[#B3B5BD] text-base">
-        Latitude
-      </label>
-      <input
-        type="text"
-        name="lat"
-        id="lat"
-        onChange={(e)=> setLat(e.target.value)}
-        value={lat}
-        className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
-      />
-    </div>
-    <div className="flex flex-col">
-      <label htmlFor="lng" className="text-[#B3B5BD] text-base">
-        Longitude
-      </label>
-      <input
-        type="text"
-        name="lng"
-        id="lng"
-        onChange={(e)=> setLng(e.target.value)}
-        value={lng}
-        className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
-      />
-    </div>
-    
+    </div> 
     <div className="flex flex-col col-span-full">
       <label
         htmlFor="Artboard Description"

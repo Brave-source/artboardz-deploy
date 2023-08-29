@@ -4,6 +4,7 @@ import collectionReducer from './CollectionSlice';
 import collectorReducer from './CollectorSlice';
 import merchantReducer from './MerchantSlice';
 import adminReducer from "./AdminSlice";
+import locationReducer from "./LocationSlice"
 import {
   persistStore,
   persistReducer,
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
   admin: adminReducer, 
   collector: collectorReducer,
   merchant: merchantReducer, 
+  location: locationReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
