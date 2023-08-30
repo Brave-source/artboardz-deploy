@@ -1,13 +1,12 @@
 
 import React from 'react';
-import EditLocations from '../../components/Collections/EditLocations'
 import LocationList from '../../components/Locations/LocationList';
 
-const index = () => {
+const Index = () => {
 
   return (
     <LocationList/>
   );
 }
 
-export default index;
+export default Index;

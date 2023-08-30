@@ -68,8 +68,8 @@ const CollectorsItems = ({
   const deleteCollector = async(id) => {
     dispatch(deleteCollectorStart())
     try {
-      await axios.delete(`http://localhost:3000/api/collectors/${id}`)
-      // await axios.delete(globalURL == "www" ? `${externalURL}/api/collectors/${id}`:`${baseURL}/api/collectors/${id}`);
+      // await axios.delete(`http://localhost:3000/api/collectors/${id}`)
+      await axios.delete(globalURL == "www" ? `${externalURL}/api/collectors/${id}`:`${baseURL}/api/collectors/${id}`);
       dispatch(deleteCollectorSuccess(id))
       toast.success("Successfully deleted")
     }catch(err){

@@ -5,6 +5,8 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 const EditLocationForm = ({ toggEditLocation, id }) => {
+    const externalURL = "https://www.admin.artboardz.net";
+    const globalURL = window.location.hostname.substring(0,3).toLocaleLowerCase();
     const location = useSelector((state) => state.location.locations.filter((item) => item._id === id))[0];
     const [title, setTitle] = useState(location.title);
     const [lat, setLat] = useState(location.position.lat);
@@ -22,7 +24,8 @@ const EditLocationForm = ({ toggEditLocation, id }) => {
         }
         dispatch(updateLocationStart());
         try {
-            const res = await axios.put(`http://localhost:3000/api/locations/${id}`, data);
+            // const res = await axios.put(`http://localhost:3000/api/locations/${id}`, data);
+            const res = await axios.put(globalURL == "www" ? `${externalURL}/api/locations/${id}` :`${baseURL}/api/locations/${id}`, data);
             dispatch(updateLocationSuccess({id, data}));
             toggEditLocation()
             toast.success("Location successfully edited")

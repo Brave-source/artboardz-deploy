@@ -9,7 +9,13 @@ import AddTaskIcon from '@mui/icons-material/AddTask';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import PreviewIcon from '@mui/icons-material/Preview';
 import { useDispatch } from 'react-redux';
+import Notiflix from 'notiflix';
+import { deleteMerchantFailure, deleteMerchantStart, deleteMerchantSuccess } from '../../store/redux-store/MerchantSlice';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 const VendorsItem = ({merchants}) => {
+  const externalURL = "https://www.admin.artboardz.net";
+  const globalURL = window.location.hostname.substring(0,3).toLocaleLowerCase();
   // Placeholder array with 3 objects to create 3 rows
   const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
@@ -42,12 +48,14 @@ const VendorsItem = ({merchants}) => {
   const deleteMerchant = async(id) => {
     dispatch(deleteMerchantStart())
     try {
-      // globalURL == "www" ? `${externalURL}/api/merchants/${id}` :`${baseURL}/api/merchants/${id}`
-      await axios.delete(`http://localhost:3000/api/merchants/${id}`);
+      // await axios.delete(`http://localhost:3000/api/merchants/${id}`);
+      await axios.delete(globalURL == "www" ? `${externalURL}/api/merchants/${id}` :`${baseURL}/api/merchants/${id}`);
       dispatch(deleteMerchantSuccess(id))
+      toast.success("Successfully deleted!")
     }catch(err){
       console.log(err);
       dispatch(deleteMerchantFailure())
+      toast.error("Something went wrong")
     }
   }
 
@@ -75,10 +83,10 @@ const VendorsItem = ({merchants}) => {
         <button onClick={toggleMerchantModal}>
           <PreviewIcon />
         </button>
-        <button onClick={() => confirmDelete(id)}>
+        <button >
             <AddTaskIcon className="w-5 h-5" />
           </button>
-          <button onClick={() => confirmDelete(id)}>
+          <button onClick={() => confirmDelete(item?._id)}>
             <HighlightOffIcon className="w-5 h-5" />
           </button>
       </div>

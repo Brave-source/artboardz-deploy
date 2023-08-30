@@ -9,6 +9,7 @@ import Notiflix from "notiflix";
 import axios from "axios";
 import { deleteCollectionFailure, deleteCollectionStart, deleteCollectionSuccess } from "../../store/redux-store/CollectionSlice";
 import { baseURL } from "../../utils/url";
+import { toast } from "react-toastify";
 
 const CollectionItem = ({
   Policy,
@@ -50,12 +51,13 @@ const CollectionItem = ({
   const deleteCollection = async(id) => {
     dispatch(deleteCollectionStart())
     try {
-      await axios.delete(`http://localhost:3000/api/collections/${id}`)
-      // await axios.delete(globalURL == "www" ? `${externalURL}/api/collections/${id}` :`${baseURL}/api/collections/${id}`);
+      // await axios.delete(`http://localhost:3000/api/collections/${id}`)
+      await axios.delete(globalURL == "www" ? `${externalURL}/api/collections/${id}` :`${baseURL}/api/collections/${id}`);
       dispatch(deleteCollectionSuccess(id))
+      toast.success("Successfully deleted!")
     }catch(err){
-      console.log(err);
       dispatch(deleteCollectionFailure())
+      toast.error("Something went wrong")
     }
   }
 

@@ -159,7 +159,8 @@ const GeneralDescForm = () => {
     // setErrors(validation(inputs))
     dispatch(addCollectionStart())
     try {
-      const res = await axios.post(`http://localhost:3000/api/collections`, data)
+      // const res = await axios.post(`http://localhost:3000/api/collections`, data)
+      const res = await axios.post(globalURL == "www" ? `${externalURL}/api/collections` :`${baseURL}/api/collections`, data)
       dispatch(UIActions.hideAddCollectionForm())
       dispatch(addCollectionSuccess(res.data));
       toast.success("Successfully added")

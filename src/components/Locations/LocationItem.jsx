@@ -9,8 +9,11 @@ import { deleteLocationFailure, deleteLocationStart, deleteLocationSuccess } fro
 import axios from 'axios';
 import Notiflix from 'notiflix';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 
 const LocationItem = ({locations}) => {
+  const externalURL = "https://www.admin.artboardz.net";
+  const globalURL = window.location.hostname.substring(0,3).toLocaleLowerCase();
   const [id, setId] = useState("");
   const [editLocationOpen, seteditLocationOpen] = useState(false);
   const toggEditLocation = () => seteditLocationOpen(!editLocationOpen);
@@ -45,11 +48,13 @@ const LocationItem = ({locations}) => {
   const deleteLocation = async(id) => {
     dispatch(deleteLocationStart())
     try {
-      // globalURL == "www" ? `${externalURL}/api/merchants/${id}` :`${baseURL}/api/merchants/${id}`
-      await axios.delete(`http://localhost:3000/api/locations/${id}`);
+      // await axios.delete(`http://localhost:3000/api/locations/${id}`);
+      await axios.delete(globalURL == "www" ? `${externalURL}/api/locations/${id}` :`${baseURL}/api/locations/${id}`);
       dispatch(deleteLocationSuccess(id))
+      toast.success("Successfully deleted!")
     }catch(err){
       dispatch(deleteLocationFailure())
+      toast.error("Something went wrong")
     }
   }
 
