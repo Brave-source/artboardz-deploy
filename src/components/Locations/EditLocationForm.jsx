@@ -33,7 +33,7 @@ const EditLocationForm = ({ toggEditLocation, id }) => {
     }
 
     return (
-        <form className='w-[50vw] h-[40vh] flex flex-col gap-4 px-4 font-[inter]' onSubmit={submit}>
+        <form className='w-[50vw] h-[30vh] flex flex-col gap-4 px-4 font-[inter]' onSubmit={submit}>
             <div className="flex flex-col">
                 <label className='font-semibold text-sm text-slate-600' htmlFor="title">Title/City</label>
                 <input className='bg-white outline text-md text-[#9EA6A9]  outline-[#9EA6A9] outline-1 p-1 rounded-lg' name='title' value={title} onChange={(e) => setTitle(e.target.value)} type="text" placeholder='' />
