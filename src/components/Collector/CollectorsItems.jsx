@@ -89,7 +89,7 @@ const CollectorsItems = ({
        </a>
      </div>
     ): (
-      <div>No address</div>
+      <div>....</div>
     )}
     <div>
       <p>{name}</p>
