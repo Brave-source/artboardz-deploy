@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 const LocationForm = ({ toggleLocation }) => {
     const [input, setInput] = useState({
         title: "",
-        position: {lat: "", lng: ""},
+        position: { lat: "", lng: "" },
         collectionId: ""
     })
     const collections = useSelector((state) => state.collection.collections)
@@ -49,7 +49,7 @@ const LocationForm = ({ toggleLocation }) => {
 
     console.log(input)
 
-    const submit = async(e) => {
+    const submit = async (e) => {
         e.preventDefault();
         dispatch(addLocationStart())
         try {
@@ -57,7 +57,7 @@ const LocationForm = ({ toggleLocation }) => {
             dispatch(addLocationSuccess(res.data));
             toast.success("Successfully added")
             toggleLocation()
-        }catch(err) {
+        } catch (err) {
             dispatch(addLocationFailure())
             toast.error("Something went wrong")
         }
@@ -67,13 +67,22 @@ const LocationForm = ({ toggleLocation }) => {
         <form className='w-[50vw] h-[40vh] flex flex-col gap-4 px-4 font-[inter]' onSubmit={submit}>
             <div className="flex flex-col">
                 <label className='font-semibold text-sm text-slate-600' htmlFor="visibility">Collection</label>
-                <select name="collectionId" required onChange={handleChange} className='outline-[#9EA6A9] outline-1 p-1 rounded-lg text-sm border focus:outline-none 'id="visibility">
-                    <option></option>
-                    {collections.map((item) => {
-                        return (
-                            <option value={item._id}>{item.title}</option>
-                        )
-                    })}
+                <select
+                    name="collectionId"
+                    required
+                    onChange={handleChange}
+                    className='bg-white outline-[#9EA6A9] outline-1 p-1 rounded-lg text-sm border focus:outline-none'
+                    id="visibility"
+                >
+                    {/* Automatically select the first option */}
+                    <option value="" selected disabled>
+                        Select a collection
+                    </option>
+                    {collections.map((item) => (
+                        <option key={item._id} value={item._id}>
+                            {item.title}
+                        </option>
+                    ))}
                 </select>
             </div>
             <div className="flex flex-col">
