@@ -105,33 +105,6 @@ const CollectionSchema = new mongoose.Schema({
         type: [String],
         default: []
     },
-    vendors: {
-        type: [{
-            position: {
-                  lat: {
-                    type: Number,
-                    required: true
-                  },
-                  lng: {
-                    type: Number,
-                    required: true
-                  }
-            },
-            title: {
-                type: String,
-                required: false
-            },
-            desc: {
-                type: String,
-                required: false
-            },
-            img: {
-                type: String,
-                default: ""
-            }
-        }],
-        default: []
-    }
 }, {timestamps: true})
 
 export default mongoose.models.Collection || mongoose.model('Collection', CollectionSchema)

@@ -12,7 +12,7 @@ import { baseURL } from "../../utils/url";
 
 const CollectorsItems = ({
   image,
-  walletAddress,
+  address,
   name,
   nationality,
   twitter,
@@ -83,8 +83,8 @@ const CollectorsItems = ({
       <Avatar image={image ? image : "https://firebasestorage.googleapis.com/v0/b/cardano-d265c.appspot.com/o/defaultProfile.png?alt=media&token=a2172f23-507f-4e25-a64d-beb767d9d0f3"} />
     </div>
     <div>
-      <a href={`https://pool.pm/${walletAddress}`} target="_blank" rel="noreferrer" >
-      <p className="break-all">{walletAddress?.slice(0,5)}...{walletAddress?.slice(walletAddress.length - 4)}</p>
+      <a href={`https://pool.pm/${address[0]}`} target="_blank" rel="noreferrer" >
+      <p className="break-all">{address[0]?.slice(0,5)}...{address[0]?.slice(address[0]?.length - 4)}</p>
       </a>
     </div>
     <div>

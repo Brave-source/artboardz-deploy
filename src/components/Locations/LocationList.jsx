@@ -56,10 +56,7 @@ const LocationList = () => {
                 </select>
             </div>
             <div className="bg-[#14171F] p-5 text-center text-sm font-semibold">
-                <div className="grid grid-cols-5 place-items-center text-white">
-                    <div className="flex gap-2 items-center">
-                        <p>Image</p>
-                    </div>
+                <div className="grid grid-cols-4 place-items-center text-white">
                     <div className="flex gap-2 items-center">
                         <p>Title</p>
                     </div>

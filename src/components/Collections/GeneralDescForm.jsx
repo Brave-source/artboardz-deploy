@@ -20,9 +20,6 @@ import { baseURL } from "../../utils/url";
 const GeneralDescForm = () => {
   const [entries, setEntries] = useState([]);
 
-  const log =(e) =>{
-    e.stopPropagation()
-  }
   const handleInputChange = (index, field, value) => {
     const newEntries = [...entries];
     if(field == 'lat' || field == 'lng') {
@@ -35,7 +32,7 @@ const GeneralDescForm = () => {
     }
     setEntries(newEntries);
   };
-console.log(entries)
+
   const handleAddEntry = (e) => {
     e.stopPropagation()
     const newEntry = {
@@ -44,9 +41,6 @@ console.log(entries)
         lng: "" 
       },
       title: '',
-      desc: '',
-      img: '',
-      link:''
     };
     setEntries([...entries, newEntry]);
   };
@@ -57,7 +51,6 @@ console.log(entries)
   const [errors, setErrors] = useState({});
   const [digitalArtboard, setdigitalArtboard] = useState(null);
   const [physicalArtboard, setphysicalArtboard] = useState(null);
-  const [vendorsImage, setvendorsImage] = useState(null);
   const dispatch = useDispatch();
 
   // image preview
@@ -65,7 +58,6 @@ console.log(entries)
   const [ArtistUrl, setArtistUrl] = useState(null);
   const [digitalArtboardUrl, setdigitalArtboardUrl] = useState(null);
   const [physicalArtboardUrl, setphysicalArtboardUrl] = useState(null);
-  const [vendorsImageUrl, setvendorsImageUrl] = useState(null)
 
   const handleChange = (e) => {
     setInputs((prev) => {
@@ -132,10 +124,8 @@ console.log(entries)
     if (physicalArtboard) {
       setphysicalArtboardUrl(URL.createObjectURL(physicalArtboard));
     }
-    if (vendorsImage) {
-      setvendorsImageUrl(URL.createObjectURL(vendorsImage));
-    }
-  }, [Banner, Artist, digitalArtboard, physicalArtboard, vendorsImage]);
+
+  }, [Banner, Artist, digitalArtboard, physicalArtboard]);
 
   useEffect(() => {
     Banner && uploadFile(Banner , "bannerUrl");
@@ -152,9 +142,6 @@ console.log(entries)
   useEffect(() => {
     physicalArtboard && uploadFile(physicalArtboard, "physicalArtUrl");
   }, [physicalArtboard]);
-  useEffect(() => {
-    vendorsImage && uploadFile(vendorsImage, "img");
-  }, [vendorsImage]);
 
   const hideFormHandler = (evt) => {
     evt.preventDefault();
@@ -592,48 +579,6 @@ console.log(entries)
                 className="focus:bg-transparent bg-[#272832] border border-gray-300 rounded px-2 py-1 w-full"
                 value={entry.title}
                 onChange={(e) => handleInputChange(index, 'title', e.target.value)}
-              />
-            </div>
-            <div>
-              <textarea
-                placeholder="Description"
-                className="focus:bg-transparent bg-[#272832] border border-gray-300 rounded px-2 py-1 w-full"
-                value={entry.desc}
-                onChange={(e) => handleInputChange(index, 'desc', e.target.value)}
-              ></textarea>
-            </div>
-            <div className="mb-4">
-              <input
-                type="text"
-                placeholder="Link"
-                className="focus:bg-transparent bg-[#272832] border border-gray-300 rounded px-2 py-1 w-full"
-                value={entry.link}
-                onChange={(e) => handleInputChange(index, 'title', e.target.value)}
-              />
-            </div>
-            <div className="flex flex-col  ">
-              <span className="text-[#B3B5BD] text-base">
-              Image
-              </span>
-              <label
-                htmlFor="vendorsImage"
-                className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-[150px] text-base px-3 flex items-center justify-center"
-              >
-                {vendorsImage && vendorsImageUrl ?
-                <div style={{width: '100%', height: '100%', position: 'relative'}}>
-                  <Image src={entry.img? entry.img : vendorsImageUrl} fill objectFit='contain'/>
-                  </div>
-                  :
-                  <CameraIcon />
-                }
-              </label>
-              <input
-                type="file"
-                name="vendorsImag"
-                id="vendorsImage"
-                onChange={(e) => setvendorsImage(e.target.files[0])}
-                accept="image/*"
-                hidden
               />
             </div>
           </div>

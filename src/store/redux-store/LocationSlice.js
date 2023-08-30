@@ -29,7 +29,7 @@ export const locationSlice = createSlice({
         updateLocationSuccess: (state, action) => {
             state.locations[
                 state.locations.findIndex((item) => item._id == action.payload.id)
-            ] = action.payload.location;
+            ] = action.payload.data;
             state.isFetching = false;
         },
         updateLocationFailure: (state) => {
@@ -48,7 +48,22 @@ export const locationSlice = createSlice({
         addLocationFailure: (state) => {
             state.error = true;
             state.isFetching = false;
-        }
+        },
+        deleteLocationStart: (state) => {
+            state.isFetching = true;
+            state.error = false;
+        },
+        deleteLocationSuccess: (state, action) => {
+            state.locations.splice(
+                state.locations.findIndex((item) => item._id === action.payload),
+                1
+            );
+            state.isFetching = false;
+        },
+        deleteLocationFailure: (state) => {
+            state.isFetching = false;
+            state.error = true;
+        },
     }
 })
 
@@ -62,6 +77,9 @@ export const {
     addLocationFailure,
     addLocationSuccess,
     addLocationStart,
+    deleteLocationFailure,
+    deleteLocationStart,
+    deleteLocationSuccess,
 } = locationSlice.actions;
 
 export default locationSlice.reducer;
