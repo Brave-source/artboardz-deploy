@@ -53,7 +53,7 @@ const LocationList = () => {
                     <option onClick={emptyFilters}>All</option>
                     {collections.map((item) => {
                         return (
-                            <option value={item._id}>{item.title}</option>
+                            <option  key ={item._id} value={item._id}>{item.title}</option>
                         )
                     })}
                 </select>
