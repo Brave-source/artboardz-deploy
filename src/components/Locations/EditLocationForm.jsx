@@ -11,7 +11,7 @@ const EditLocationForm = ({ toggEditLocation, id }) => {
     const [lng, setLng] = useState(location.position.lng);
 
     const dispatch = useDispatch()
-
+    
     const submit = async(e) => {
         e.preventDefault();
         const data = {
