@@ -5,6 +5,8 @@ import { addLocationFailure, addLocationStart, addLocationSuccess } from '../../
 import { toast } from 'react-toastify';
 
 const LocationForm = ({ toggleLocation }) => {
+    const externalURL = "https://www.admin.artboardz.net";
+    const globalURL = window.location.hostname.substring(0,3).toLocaleLowerCase();
     const [input, setInput] = useState({
         title: "",
         position: { lat: "", lng: "" },
@@ -47,13 +49,12 @@ const LocationForm = ({ toggleLocation }) => {
         }
     }
 
-    console.log(input)
-
     const submit = async (e) => {
         e.preventDefault();
         dispatch(addLocationStart())
         try {
-            const res = await axios.post(`http://localhost:3000/api/locations`, input);
+            // const res = await axios.post(`http://localhost:3000/api/locations`, input);
+            const res = await axios.post(globalURL == "www" ? `${externalURL}/api/locations` :`${baseURL}/api/locations`, input);
             dispatch(addLocationSuccess(res.data));
             toast.success("Successfully added")
             toggleLocation()

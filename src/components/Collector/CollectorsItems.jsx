@@ -68,8 +68,8 @@ const CollectorsItems = ({
   const deleteCollector = async(id) => {
     dispatch(deleteCollectorStart())
     try {
-      await axios.delete(`http://localhost:3000/api/collectors/${id}`)
-      // await axios.delete(globalURL == "www" ? `${externalURL}/api/collectors/${id}`:`${baseURL}/api/collectors/${id}`);
+      // await axios.delete(`http://localhost:3000/api/collectors/${id}`)
+      await axios.delete(globalURL == "www" ? `${externalURL}/api/collectors/${id}`:`${baseURL}/api/collectors/${id}`);
       dispatch(deleteCollectorSuccess(id))
       toast.success("Successfully deleted")
     }catch(err){
@@ -82,11 +82,15 @@ const CollectorsItems = ({
     <div className="w-[48px] aspect-square rounded-full">
       <Avatar image={image ? image : "https://firebasestorage.googleapis.com/v0/b/cardano-d265c.appspot.com/o/defaultProfile.png?alt=media&token=a2172f23-507f-4e25-a64d-beb767d9d0f3"} />
     </div>
-    <div>
-      <a href={`https://pool.pm/${address[0]}`} target="_blank" rel="noreferrer" >
-      <p className="break-all">{address[0]?.slice(0,5)}...{address[0]?.slice(address[0]?.length - 4)}</p>
-      </a>
-    </div>
+    {address?.length > 0 ? (
+       <div>
+       <a href={`https://pool.pm/${address[0]}`} target="_blank" rel="noreferrer" >
+       <p className="break-all">{address[0]?.slice(0,5)}...{address[0]?.slice(address[0]?.length - 4)}</p>
+       </a>
+     </div>
+    ): (
+      <div>....</div>
+    )}
     <div>
       <p>{name}</p>
     </div>

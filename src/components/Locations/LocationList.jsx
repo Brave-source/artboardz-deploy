@@ -9,6 +9,8 @@ import Modal from '../Modal';
 import { getLocationFailure, getLocationStart, getLocationSuccess } from '../../store/redux-store/LocationSlice';
 
 const LocationList = () => {
+    const externalURL = "https://www.admin.artboardz.net";
+    const globalURL = window.location.hostname.substring(0,3).toLocaleLowerCase();
     const dispatch = useDispatch()
     const [collectionId, setCollectionId] = useState("");
     const [filteredLocation, setFilteredLocation] = useState([]);
@@ -21,7 +23,8 @@ const LocationList = () => {
         const getLocations = async () => {
             dispatch(getLocationStart())
             try {
-                const res = await axios.get(`http://localhost:3000/api/locations`);
+                // const res = await axios.get(`http://localhost:3000/api/locations`);
+                const res = await axios.get(globalURL == "www" ? `${externalURL}/api/locations` :`${baseURL}/api/locations`);
                 dispatch(getLocationSuccess(res.data));
             } catch (er) {
                 dispatch(getLocationFailure())
@@ -50,7 +53,7 @@ const LocationList = () => {
                     <option onClick={emptyFilters}>All</option>
                     {collections.map((item) => {
                         return (
-                            <option value={item._id}>{item.title}</option>
+                            <option  key ={item._id} value={item._id}>{item.title}</option>
                         )
                     })}
                 </select>
