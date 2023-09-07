@@ -1,19 +1,11 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getStorage,
-  ref,
-  uploadBytesResumable,
-  getDownloadURL,
-} from "firebase/storage";
 import Image from "next/image";
-import app from "../../firebase";
 import { toast } from "react-toastify";
 import axios from 'axios';
-import validation from "./FormValidation";
-import CameraIcon from "../../Assets/Icons/CameraIcon";
-import { baseURL } from "../../utils/url";
-import { AddCollectionFormIsShown, UIActions } from "../../store/redux-store/UI-slice";
+import {v4 as uuid} from "uuid";
+import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { updateCollectionFailure, updateCollectionStart, updateCollectionSuccess } from "../../store/redux-store/CollectionSlice";
 
 const GeneralDescForm = ({ id, setIsOpen, collection }) => {
@@ -93,43 +85,41 @@ const GeneralDescForm = ({ id, setIsOpen, collection }) => {
     evt.preventDefault();
     setIsOpen((prev) => !prev)
   };
-  
-  const uploadFile = (file, urlType) => {
-    const storage = getStorage(app);
-    const fileName = new Date().getTime() + file.name;
-    const storageRef = ref(storage, fileName);
-    const uploadTask = uploadBytesResumable(storageRef, file);
 
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        
-        switch (snapshot.state) {
-          case "paused":
-            console.log("Upload is paused");
-            break;
-          case "running":
-             console.log("Upload is running" + progress);
-            break;
-          default:
-            break;
-        }
-      },
-      (error) => {
-        toast.error("Try again!")
-      },
-      () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          setInputs((prev) => {
-            return { ...prev, [urlType]: downloadURL };
+    const uploadFile = async (file, urlType) => {
+    const cred = {
+      accessKeyId: process.env.NEXT_PUBLIC_AWS_ACCESS_KEY,
+      secretAccessKey: process.env.NEXT_PUBLIC_AWS_SECRET_KEY,
+    }
+      const client = new S3Client({ region: "us-east-1", credentials: cred});
+      const key = `${uuid()}.${file.name}`;
+      const command = new PutObjectCommand({
+        Bucket: "artboardz",
+        Key: key,
+        Body: file,
+      });
+      try {
+        const signedUrl = await getSignedUrl(client, command, { expiresIn: 3600 });
+        console.log(`Successfully uploaded file. URL: ${signedUrl}`);
+        await fetch(signedUrl, {
+          method: "PUT",
+          headers: {
+            "Content-Type" : "image/jpg"
+          },
+          body: file
+        })
+        .then((data) => {
+           setInputs((prev) => {
+            return { ...prev, [urlType]: `https://artboardz.s3.us-east-1.amazonaws.com/${key}` };
           });
-          toast.success("Successfully upload photo!")
-        });
+          toast.success("Image successfully upload!")
+        })
+        .catch((err) => toast.error("Image upload failed! Try again"));
+      } catch (err) {
+        console.error("Error uploading file: ", err);
+        toast.error("Image upload failed! Try again")
       }
-    );
-  };
+    };
 
   useEffect(() => {
     if (Banner) {

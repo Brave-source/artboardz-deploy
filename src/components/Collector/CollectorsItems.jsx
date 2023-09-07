@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CancelIcon from "../../Assets/Icons/CancelIcon";
 import OptionsIcon from "../../Assets/Icons/Options";
 import CloseIcon from '@mui/icons-material/Close';
@@ -9,6 +9,7 @@ import Notiflix from "notiflix";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { baseURL } from "../../utils/url";
+import { S3Client, DeleteObjectCommand } from "@aws-sdk/client-s3";
 
 const CollectorsItems = ({
   image,
@@ -22,6 +23,7 @@ const CollectorsItems = ({
   id
 }) => {
   const [actionsPanelIsShown, setActionsPanelIsShown] = useState(false);
+  const [img, setImg] = useState(null);
   const externalURL = "https://www.admin.artboardz.net"
   const globalURL = window.location.hostname.substring(0,3).toLocaleLowerCase()
 
@@ -53,6 +55,11 @@ const CollectorsItems = ({
       }
     );
   };
+
+  useEffect(() =>{
+    img && deleteImageFromS3(img)
+  },[img])
+  
   const handleDisplay = async() => {
     const user = {...collector, display: !collector.display};
     dispatch(updateCollectorStart())
@@ -65,11 +72,29 @@ const CollectorsItems = ({
     }
   }
 
+  const deleteImageFromS3 = async (img) => {
+
+    const bucketParams = { Bucket: "artboardz", Key: img.split("/")[3] };
+    const cred = {
+      accessKeyId: process.env.NEXT_PUBLIC_AWS_ACCESS_KEY,
+      secretAccessKey: process.env.NEXT_PUBLIC_AWS_SECRET_KEY,
+    }
+      const client = new S3Client({ region: "us-east-1", credentials: cred});
+    try {
+      const data = await client.send(new DeleteObjectCommand(bucketParams));
+      console.log("Success. Object deleted.", data);
+      return data; // For unit tests.
+    } catch (err) {
+      console.log("Error", err);
+    }
+  };
+
   const deleteCollector = async(id) => {
     dispatch(deleteCollectorStart())
     try {
       // await axios.delete(`http://localhost:3000/api/collectors/${id}`)
       await axios.delete(globalURL == "www" ? `${externalURL}/api/collectors/${id}`:`${baseURL}/api/collectors/${id}`);
+      setImg(image)
       dispatch(deleteCollectorSuccess(id))
       toast.success("Successfully deleted")
     }catch(err){
@@ -80,7 +105,7 @@ const CollectorsItems = ({
   return (
     <li className="grid grid-cols-9 py-5 place-items-center text-sm font-semibold tracking-wide break-word border-b border-[#AECEFF] last-of-type:border-none text-[#323A46] relative">
     <div className="w-[48px] aspect-square rounded-full">
-      <Avatar image={image ? image : "https://firebasestorage.googleapis.com/v0/b/cardano-d265c.appspot.com/o/defaultProfile.png?alt=media&token=a2172f23-507f-4e25-a64d-beb767d9d0f3"} />
+      <Avatar image={image ? image : "https://artboardz.s3.us-east-1.amazonaws.com/defaultProfile.png"} />
     </div>
     {address?.length > 0 ? (
        <div>

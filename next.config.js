@@ -9,7 +9,7 @@ const nextConfig = {
     return config;
   },
   images: {
-    domains: ["encrypted-tbn0.gstatic.com", "images.unsplash.com", "firebasestorage.googleapis.com"],
+    domains: ["encrypted-tbn0.gstatic.com", "images.unsplash.com", "firebasestorage.googleapis.com", "artboardz.s3.us-east-1.amazonaws.com"],
   }
 };
 module.exports = nextConfig;

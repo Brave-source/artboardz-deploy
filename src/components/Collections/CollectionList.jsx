@@ -61,6 +61,10 @@ return (
             location={data?.location}
             city={data?.city}
             country={data?.country}
+            bannerUrl={data?.bannerUrl}
+            artistUrl={data?.artistUrl}
+            digitalUrl={data?.digitalArtUrl}
+            physicalUrl={data?.physicalArtUrl}
           />
         );
       })}

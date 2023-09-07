@@ -19,6 +19,14 @@ const VendorSchema = new mongoose.Schema({
       type: String,
       required: false
   },
+  desc: {
+      type: String,
+      required: false
+  },
+  img: {
+      type: String,
+      default: ""
+  }
 }, {timestamps:  true})
 
 export default mongoose.models.Vendor || mongoose.model("Vendor", VendorSchema)

@@ -9,10 +9,6 @@ const CollectionSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    uid: {
-        type: String,
-        required: true,
-    },
     policy: {
         type: String,
         required: true

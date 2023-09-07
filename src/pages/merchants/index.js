@@ -4,10 +4,10 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { getMerchantFailure, getMerchantStart, getMerchantSuccess } from '../../store/redux-store/MerchantSlice';
 
-const Merchants = () => {
+const index = () => {
+  const dispatch = useDispatch();
   const externalURL = "https://www.admin.artboardz.net";
   const globalURL = window.location.hostname.substring(0,3).toLocaleLowerCase();
-  const dispatch = useDispatch();
   
   useEffect(() => {
     const getMerchants = async() => {
@@ -21,10 +21,10 @@ const Merchants = () => {
      }
     } 
     getMerchants();
- }, [])
+ }, [dispatch])
   return (
     <VendorsList />
   );
 }
 
-export default Merchants;
+export default index;
