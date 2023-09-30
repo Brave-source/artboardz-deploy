@@ -60,7 +60,6 @@ const GeneralDescForm = ({ id, setIsOpen, collection }) => {
 
   const { isFetching } = useSelector((collection) => collection.collection);
   const [policy, setPolicy] = useState(collection.policy);
-  const [uid, setUid] = useState(collection.uid);
   const [price, setPrice] = useState(collection.price);
   const [supply, setSupply] = useState(collection.supply)
   const [mintDate, setMintDate] = useState(collection.mintDate)
@@ -178,7 +177,6 @@ const GeneralDescForm = ({ id, setIsOpen, collection }) => {
     artDesc,
     webLink,
     wallet,
-    uid,
     _id: id
   }
   const formSubmitHandler = async (evt) => {
@@ -214,21 +212,7 @@ const GeneralDescForm = ({ id, setIsOpen, collection }) => {
         value={policy}
         className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
       />
-    </div>
-    <div className="flex flex-col">
-      <label htmlFor="uid" className="text-[#B3B5BD] text-base">
-        Project UID
-      </label>
-      <input
-        type="text"
-        name="uid"
-        id="uid"
-        onChange={(e) => setUid(e.target.value)}
-        value={uid}
-        className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
-      />
-    </div>
-   
+    </div> 
     <div className="flex flex-col">
       <label htmlFor="Artboard Title" className="text-[#B3B5BD] text-base">
         Artboard Title
@@ -401,19 +385,6 @@ const GeneralDescForm = ({ id, setIsOpen, collection }) => {
         className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
       />
     </div>
-    <div className="flex flex-col">
-      <label htmlFor="wallet" className="text-[#B3B5BD] text-base">
-        Artist Wallet
-      </label>
-      <input
-        type="text"
-        name="wallet"
-        id="wallet"
-        onChange={(e)=> setWallet(e.target.value)}
-        value={wallet}
-        className="focus:bg-transparent bg-[#272832] focus:outline-white focus:outline rounded-md h-11 text-base px-3"
-      />
-    </div> 
     <div className="flex flex-col col-span-full">
       <label
         htmlFor="Artboard Description"
